@@ -1,0 +1,100 @@
+@import "tailwindcss";
+@source "../app/**/*.{ts,tsx}";
+@source "../components/**/*.{ts,tsx}";
+@source "../lib/**/*.{ts,tsx}";
+
+/* =========================================================
+   THEME TOKENS - brand palette derived from the club logo
+   blue (#0080c9, "SV-Blau"). Darker/lighter shades keep the
+   same hue (~202°) for a cohesive, accessible scale.
+   ========================================================= */
+@theme {
+  --color-brand:        #0080c9;  /* Logo-Blau, Hauptfarbe */
+  --color-brand-hover:  #0067a3;  /* darker shade for hover/active */
+  --color-brand-dark:   #00456b;  /* deep navy for headings on light */
+  --color-brand-light:  #e6f3fb;  /* very light tint - surfaces */
+  --color-brand-mid:    #5bb3e0;  /* mid tint - accents */
+  --color-brand-ink:    #10232e;  /* near-black with blue cast */
+
+  --color-background: #ffffff;
+  --color-foreground: #10232e;
+  --color-muted:      #f4f9fd;    /* light tint of brand */
+  --color-border:     rgba(0, 128, 201, 0.16);
+
+  --shadow-soft: 0 10px 30px rgba(0, 69, 107, 0.10);
+  --shadow-card: 0 2px 12px rgba(0, 69, 107, 0.08);
+
+  --font-sans: var(--font-spartan), system-ui, sans-serif;
+
+  --animate-fade-in: fadeIn 400ms ease-out forwards;
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* =========================================================
+   BASE
+   ========================================================= */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-foreground);
+    background: var(--color-background);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    color: var(--color-brand-dark);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+}
+
+/* =========================================================
+   COMPONENTS
+   ========================================================= */
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-full border border-brand px-6 py-3 text-sm font-semibold text-brand transition hover:bg-brand hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2;
+  }
+
+  .eyebrow {
+    @apply mb-3 inline-block text-xs font-semibold uppercase tracking-[0.18em] text-brand;
+  }
+
+  .prose-club {
+    @apply text-base leading-relaxed text-foreground/85;
+  }
+  .prose-club p { @apply mb-4; }
+  .prose-club ul { @apply mb-4 space-y-2 pl-1; }
+  .prose-club li { @apply flex gap-2.5; }
+  .prose-club a { @apply font-medium text-brand underline-offset-2 hover:underline; }
+
+  .card {
+    @apply rounded-2xl border border-border bg-white p-6 shadow-card transition hover:shadow-soft;
+  }
+}
