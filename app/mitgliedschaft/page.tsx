@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 };
 
 const forms = [
-  "Beitrittserklärung",
-  "SEPA-Lastschriftmandat",
-  "Einwilligung nach DSGVO",
+  { label: "Beitrittserklärung", href: "/formulare/beitrittserklaerung.pdf" },
+  { label: "SEPA-Lastschriftmandat", href: "/formulare/sepa-lastschriftmandat.pdf" },
+  { label: "Einwilligung nach DSGVO", href: "/formulare/dsgvo-einwilligung.pdf" },
 ];
 
 export default function MitgliedschaftPage() {
@@ -86,29 +86,35 @@ export default function MitgliedschaftPage() {
           <h2 className="text-2xl lg:text-3xl">Benötigte Formulare</h2>
           <p className="mt-3 max-w-2xl text-foreground/70">
             Für den Antrag der Mitgliedschaft fülle bitte folgende Formulare aus.
-            Du kannst uns diese entweder ausgedruckt mitbringen oder digital
-            zusenden.
+            Lade sie hier herunter und bringe sie ausgedruckt mit oder sende sie
+            uns digital zu.
           </p>
           <ul className="mt-8 grid gap-3 sm:grid-cols-3">
             {forms.map((f) => (
-              <li key={f} className="card flex items-center gap-3">
-                <svg className="h-6 w-6 flex-none text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                </svg>
-                <span className="text-sm font-medium text-brand-dark">{f}</span>
+              <li key={f.label}>
+                <a
+                  href={f.href}
+                  download
+                  className="card group flex items-center gap-3 transition hover:border-brand/40 hover:shadow-md"
+                >
+                  <svg className="h-6 w-6 flex-none text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                  </svg>
+                  <span className="text-sm font-medium text-brand-dark">{f.label}</span>
+                  <svg className="ml-auto h-5 w-5 flex-none text-foreground/40 transition group-hover:text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                  </svg>
+                </a>
               </li>
             ))}
           </ul>
-          <p className="mt-6 text-sm text-foreground/60">
-            Die Formulare senden wir Dir auf Anfrage gerne zu.
-          </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
             <a
               href={`mailto:${contact.anmeldung.email}?subject=Mitgliedschaft%20%2F%20Formulare`}
-              className="btn-primary"
+              className="btn-secondary"
             >
-              Formulare anfragen
+              Fragen? Schreib uns
             </a>
             <Link href="/platzordnung/" className="btn-secondary">
               Zur Platzordnung
