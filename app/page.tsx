@@ -5,7 +5,7 @@ import { disciplines, news } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
 
 export default function HomePage() {
-  const latest = news.slice(0, 3);
+  const latest = [...news].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
 
   return (
     <>
@@ -155,15 +155,28 @@ export default function HomePage() {
 
       {/* NEWS */}
       <section className="container-page py-16 lg:py-24">
-        <div className="mb-10 flex items-end justify-between gap-4">
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
             <div className="eyebrow">Aktuelles</div>
             <h2 className="text-3xl lg:text-4xl">Neuigkeiten aus dem Verein</h2>
           </div>
+          <Link
+            href="/aktuelles/"
+            className="inline-flex items-center gap-1 text-sm font-semibold text-brand hover:underline"
+          >
+            Alle Neuigkeiten
+            <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
+              <path fillRule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z" clipRule="evenodd" />
+            </svg>
+          </Link>
         </div>
         <div className="grid gap-6 lg:grid-cols-3">
           {latest.map((n) => (
-            <article key={n.title} className="card flex flex-col">
+            <Link
+              key={n.slug}
+              href={`/aktuelles/#${n.slug}`}
+              className="group card flex flex-col"
+            >
               <time className="text-xs font-semibold uppercase tracking-wider text-brand">
                 {new Date(n.date).toLocaleDateString("de-DE", {
                   day: "2-digit",
@@ -173,7 +186,13 @@ export default function HomePage() {
               </time>
               <h3 className="mt-3 text-lg leading-snug text-brand-dark">{n.title}</h3>
               <p className="mt-3 flex-1 text-sm text-foreground/70">{n.excerpt}</p>
-            </article>
+              <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand">
+                Weiterlesen
+                <svg className="h-4 w-4 transition group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
+                  <path fillRule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z" clipRule="evenodd" />
+                </svg>
+              </span>
+            </Link>
           ))}
         </div>
       </section>

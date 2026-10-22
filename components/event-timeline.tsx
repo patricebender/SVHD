@@ -20,9 +20,11 @@ function fmtMonth(iso: string) {
 /**
  * Scrollable event list that, on mount, auto-scrolls to the next upcoming
  * event so past dates are tucked above but remain reachable by scrolling up.
- * "Past" is decided in the browser (the page is statically exported, so there
- * is no server "today"); until mount everything renders as upcoming to keep
- * markup deterministic and avoid a hydration mismatch.
+ * The scrollbar is hidden for a cleaner look (see .no-scrollbar); the list
+ * stays scrollable via wheel, touch and keyboard. "Past" is decided in the
+ * browser (the page is statically exported, so there is no server "today");
+ * until mount everything renders as upcoming to keep markup deterministic and
+ * avoid a hydration mismatch.
  */
 export function EventTimeline({ events }: { events: CalendarEvent[] }) {
   const sorted = [...events].sort((a, b) => a.date.localeCompare(b.date));
@@ -55,8 +57,10 @@ export function EventTimeline({ events }: { events: CalendarEvent[] }) {
     <div className="relative">
       <ol
         ref={scrollRef}
-        className="relative max-h-[32rem] space-y-3 overflow-y-auto border-l border-border py-1 pl-6 pr-1 scroll-smooth"
+        className="no-scrollbar relative max-h-[32rem] space-y-3 overflow-y-auto scroll-smooth py-1 pl-8 pr-1"
       >
+        {/* vertical rail (inside the padding so it never clips) */}
+        <span className="pointer-events-none absolute inset-y-1 left-[3px] w-px bg-border" aria-hidden />
         {sorted.map((e, i) => {
           const isPast = today !== null && e.date < today;
           const isNext = i === nextIndex;
@@ -67,7 +71,7 @@ export function EventTimeline({ events }: { events: CalendarEvent[] }) {
               className="relative scroll-mt-2"
             >
               <span
-                className={`absolute -left-[31px] top-5 h-3 w-3 rounded-full border-2 border-white ${
+                className={`absolute -left-[26px] top-5 h-3 w-3 rounded-full border-2 border-white ${
                   isPast ? "bg-brand-mid" : "bg-brand"
                 }`}
               />

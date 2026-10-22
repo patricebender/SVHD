@@ -7,7 +7,7 @@ export type NavItem = {
 };
 
 export const navItems: NavItem[] = [
-  { label: "Aktuelles", href: "/" },
+  { label: "Aktuelles", href: "/aktuelles/" },
   {
     label: "Trainingsangebote",
     href: "/trainingsangebote/",

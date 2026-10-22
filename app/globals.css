@@ -97,4 +97,13 @@
   .card {
     @apply rounded-2xl border border-border bg-white p-6 shadow-card transition hover:shadow-soft;
   }
+
+  /* Hide the scrollbar while keeping the element scrollable (wheel/touch/keys). */
+  .no-scrollbar {
+    scrollbar-width: none;            /* Firefox */
+    -ms-overflow-style: none;         /* old Edge/IE */
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;                    /* WebKit/Blink */
+  }
 }

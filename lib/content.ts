@@ -227,13 +227,35 @@ export const trainingRequirements =
 
 /** News / Aktuelles entries. */
 export const news: {
+  /** Stable anchor id, used to deep-link from the landing page teaser. */
+  slug: string;
   date: string;
+  /** Short topic tag shown as a pill (e.g. "Training", "Termine"). */
+  category: string;
   title: string;
   excerpt: string;
   body: string[];
+  /** Contextual links to related pages, shown under the article. */
+  links?: { label: string; href: string }[];
 }[] = [
   {
+    slug: "arbeitseinsatz-vereinsparty-oktober",
+    date: "2026-10-22",
+    category: "Termine",
+    title: "Arbeitseinsatz und Vereinsparty am 24. Oktober",
+    excerpt:
+      "Am Samstag, den 24. Oktober, stehen zwei Termine an: Arbeitseinsatz um 10:00 Uhr und ab 18:00 Uhr die Vereinsparty.",
+    body: [
+      "Kurze Erinnerung: Am Samstag, den 24. Oktober, gibt es gleich zwei Termine auf dem Vereinsgelände.",
+      "Um 10:00 Uhr startet der Arbeitseinsatz, bei dem wir gemeinsam das Gelände auf Vordermann bringen. Über jede helfende Hand freuen wir uns.",
+      "Ab 18:00 Uhr lassen wir den Tag bei unserer Vereinsparty gemütlich ausklingen. Kommt vorbei, wir freuen uns auf euch!",
+    ],
+    links: [{ label: "Zum Terminkalender", href: "/terminkalender/" }],
+  },
+  {
+    slug: "plaetze-vergeben",
     date: "2026-01-12",
+    category: "Training",
     title: "Hunde aller Rassen sind bei uns willkommen",
     excerpt:
       "Aktuell sind in Unterordnung, Agility & Longieren alle Plätze vergeben. Bei Interesse trotzdem melden, wir finden eine Lösung.",
@@ -242,23 +264,36 @@ export const news: {
       "Falls Du dennoch Interesse haben solltest, zögere nicht uns zu kontaktieren. Wir finden eine Lösung.",
       "Anmeldung über die Homepage oder per SMS an +49 175 5245250.",
     ],
+    links: [
+      { label: "Trainingsangebote ansehen", href: "/trainingsangebote/" },
+      { label: "Kontakt aufnehmen", href: "/kontakt/" },
+    ],
   },
   {
+    slug: "terminkalender-2026",
     date: "2026-01-05",
+    category: "Termine",
     title: "Terminkalender 2026 ist online",
     excerpt:
       "Alle Termine von der Jahreshauptversammlung über das Agility-Turnier bis zum Jahresabschluss findest Du jetzt im Terminkalender.",
     body: [
       "Der Terminkalender für 2026 steht bereit: Jahreshauptversammlung, Arbeitseinsätze, BH-Prüfung, das Agility-Turnier Baden-Cup, Vereinsfeste und mehr.",
     ],
+    links: [{ label: "Zum Terminkalender", href: "/terminkalender/" }],
   },
   {
+    slug: "social-walks-2026",
     date: "2025-12-15",
+    category: "Veranstaltung",
     title: "Social Walks 2026 mit Kathrin Fischer",
     excerpt:
       "Lust auf eine Gassirunde mit uns? Die Social Walks gehen 2026 in die nächste Runde. Termine im Kalender.",
     body: [
       "Auch 2026 leitet Kathrin Fischer wieder regelmäßige Social Walks, entspannte Gassirunden in der Gruppe. Wer teilnehmen möchte, meldet sich rechtzeitig bei uns.",
+    ],
+    links: [
+      { label: "Social-Walk-Termine", href: "/terminkalender/" },
+      { label: "Kontakt aufnehmen", href: "/kontakt/" },
     ],
   },
 ];
@@ -291,7 +326,8 @@ export const events: {
     location: "Dossenheim, Rathausplatz",
     note: "18. und 19. Juli, Details folgen",
   },
-  { date: "2026-10-24", time: "10:00 Uhr", title: "Arbeitseinsatz", location: "Vereinsgelände", note: "Details folgen" },
+  { date: "2026-10-24", time: "10:00 Uhr", title: "Arbeitseinsatz", location: "Vereinsgelände" },
+  { date: "2026-10-24", time: "ab 18:00 Uhr", title: "Vereinsparty", location: "Vereinsgelände" },
   {
     date: "2026-12-05",
     time: "ganztags",
