@@ -35,8 +35,7 @@ export default function TerminkalenderPage() {
         <p className="mt-8 text-sm text-foreground/60">
           Vergangene Termine sind ausgegraut, der nächste Termin ist
           hervorgehoben. Scrolle nach oben, um zurückliegende Veranstaltungen zu
-          sehen. Alle Angaben ohne Gewähr; kurzfristige Änderungen geben wir über
-          unser Forum und Instagram bekannt.
+          sehen.
         </p>
       </section>
 

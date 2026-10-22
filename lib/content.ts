@@ -270,7 +270,7 @@ export const news: {
     body: [
       "Aktuell können wir im Bereich Unterordnung, Agility & Longieren keine weiteren Teams aufnehmen, alle Plätze sind vergeben.",
       "Falls Du dennoch Interesse haben solltest, zögere nicht uns zu kontaktieren. Wir finden eine Lösung.",
-      "Anmeldung über die Homepage oder per SMS an +49 175 5245250.",
+      "Anmeldung über die Homepage oder per SMS an Kathrin Fischer unter +49 175 5245250.",
     ],
     links: [
       { label: "Trainingsangebote ansehen", href: "/trainingsangebote/" },

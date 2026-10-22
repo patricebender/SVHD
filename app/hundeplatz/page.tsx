@@ -17,7 +17,7 @@ export default function HundeplatzPage() {
       <PageHero
         eyebrow="Unser Hundeplatz"
         title="Viel Platz zum Trainieren"
-        subtitle="Unser Vereinsgelände liegt idyllisch am Wasser, umgeben von Feldern und Bäumen, mit Blick auf die Bergstraße."
+        subtitle="Unser Vereinsgelände liegt idyllisch am Neckar, umgeben von Feldern und Bäumen, mit Blick auf die Bergstraße."
       />
 
       {/* Rundflug video */}
@@ -104,8 +104,8 @@ export default function HundeplatzPage() {
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-soft">
             <Image
-              src="/hundeplatz/husky-laufsteg.webp"
-              alt="Husky auf dem Laufsteg unseres Agility-Parcours"
+              src="/hundeplatz/agility-slalom.webp"
+              alt="Hund und Hundeführerin beim Slalom im Agility-Parcours"
               fill
               className="object-cover"
               sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
@@ -113,8 +113,8 @@ export default function HundeplatzPage() {
           </div>
           <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-soft">
             <Image
-              src="/hundeplatz/husky-rampe.webp"
-              alt="Husky balanciert auf einem Balance-Board auf dem Vereinsgelände"
+              src="/hundeplatz/husky-sonnenuntergang.webp"
+              alt="Husky auf dem Trainingsplatz bei Sonnenuntergang"
               fill
               className="object-cover"
               sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
@@ -122,10 +122,10 @@ export default function HundeplatzPage() {
           </div>
           <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-soft sm:col-span-2 sm:aspect-[16/9] lg:col-span-1 lg:aspect-[3/4]">
             <Image
-              src="/hundeplatz/husky-sonnenuntergang.webp"
-              alt="Husky auf dem Trainingsplatz bei Sonnenuntergang"
+              src="/hundeplatz/agility-steg.webp"
+              alt="Hund auf dem Laufsteg bei einem Agility-Turnier"
               fill
-              className="object-cover"
+              className="object-cover object-[20%_center]"
               sizes="(min-width: 1024px) 33vw, 100vw"
             />
           </div>

@@ -27,7 +27,7 @@ export function SiteHeader() {
             priority
             className="h-10 w-auto lg:h-12"
           />
-          <span className="hidden flex-col leading-tight sm:flex">
+          <span className="flex flex-col leading-tight">
             <span className="text-sm font-bold text-brand-dark lg:text-base">
               SV Heidelberg &amp; Dossenheim
             </span>

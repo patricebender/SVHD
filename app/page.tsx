@@ -48,19 +48,37 @@ export default function HomePage() {
             <div className="prose-club mt-6">
               <p>
                 Wir, die Ortsgruppe Heidelberg und Dossenheim (gegründet 1922),
-                sind eine der ältesten Ortsgruppen des 1899 gegründeten Vereins
-                für Deutsche Schäferhunde (SV). Der SV gehört dem Verband für das
-                Hundewesen (VDH) und der Weltorganisation FCI an.
+                sind eine der ältesten Ortsgruppen des 1899 gegründeten{" "}
+                <a
+                  href="https://www.schaeferhunde.de/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Vereins für Deutsche Schäferhunde (SV)
+                </a>
+                . Der SV gehört dem Verband für das Hundewesen (VDH) und der
+                Weltorganisation FCI an.
               </p>
               <p>
-                Wir bieten Training für Prüfungen und Wettkämpfe in Agility sowie
-                im Vielseitigkeitsbereich gemäß IGP. Jedes Hund-Mensch-Team kann
-                sich bei uns auf den VDH-Hundeführerschein und die
-                Begleithundeprüfung vorbereiten.
+                Wir bieten Training für Prüfungen und Wettkämpfe in{" "}
+                <Link href="/trainingsangebote/agility/">Agility</Link> sowie im
+                Vielseitigkeitsbereich gemäß{" "}
+                <Link href="/trainingsangebote/unterordnung/">IGP</Link>. Jedes
+                Hund-Mensch-Team kann sich bei uns auf den VDH-Hundeführerschein
+                und die{" "}
+                <Link href="/trainingsangebote/begleithundepruefung/">
+                  Begleithundeprüfung
+                </Link>{" "}
+                vorbereiten. Eine vollständige Übersicht unseres
+                Trainingsangebots findet ihr{" "}
+                <Link href="/trainingsangebote/">hier</Link>.
               </p>
               <p>
-                <strong>Bei uns können auch Nichtmitglieder</strong> mit ihrem
-                Hund, unabhängig von der Rasse, am Ausbildungsangebot teilnehmen.
+                <strong>Auch Nichtmitglieder</strong> können mit ihrem Hund,
+                unabhängig von der Rasse, am Ausbildungsangebot teilnehmen,{" "}
+                <Link href="/kontakt/">sprich uns einfach an</Link>. Wer dauerhaft
+                dabei sein möchte, wird am besten{" "}
+                <Link href="/mitgliedschaft/">Mitglied</Link>.
               </p>
             </div>
           </div>

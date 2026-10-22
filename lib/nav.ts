@@ -13,13 +13,13 @@ export const navItems: NavItem[] = [
     href: "/trainingsangebote/",
     children: [
       { label: "Übersicht & Trainingszeiten", href: "/trainingsangebote/" },
-      { label: "Unser Hundeplatz", href: "/hundeplatz/" },
       ...disciplines.map((d) => ({
         label: d.title,
         href: `/trainingsangebote/${d.slug}/`,
       })),
     ],
   },
+  { label: "Hundeplatz", href: "/hundeplatz/" },
   { label: "Terminkalender", href: "/terminkalender/" },
   { label: "Kontakt", href: "/kontakt/" },
 ];

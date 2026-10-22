@@ -50,6 +50,16 @@ export function SiteFooter() {
                 Platzordnung
               </Link>
             </li>
+            <li>
+              <a
+                href="https://www.schaeferhunde.de/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition hover:text-white"
+              >
+                SV Bundesverband
+              </a>
+            </li>
           </ul>
         </div>
 

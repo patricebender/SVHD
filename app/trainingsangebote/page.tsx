@@ -32,7 +32,7 @@ export default function TrainingsangebotePage() {
           <h2 className="text-lg text-brand-dark">{trainingNotice.heading}</h2>
           <p className="mt-2 text-sm text-foreground/80">{trainingNotice.text}</p>
           <p className="mt-3 text-sm text-foreground/80">
-            Anmeldung über die Homepage oder per SMS an{" "}
+            Anmeldung über die Homepage oder per SMS an Kathrin Fischer unter{" "}
             <a href={contact.smsHref} className="font-semibold text-brand hover:underline">
               {contact.sms}
             </a>
@@ -91,7 +91,12 @@ export default function TrainingsangebotePage() {
               </ul>
 
               {/* Tablet and up: table */}
-              <table className="hidden w-full text-left text-sm sm:table">
+              <table className="hidden w-full table-fixed text-left text-sm sm:table">
+                <colgroup>
+                  <col className="w-[28%]" />
+                  <col className="w-[42%]" />
+                  <col className="w-[30%]" />
+                </colgroup>
                 <thead className="bg-muted text-foreground/60">
                   <tr>
                     <th className="px-5 py-2.5 font-semibold">Uhrzeit</th>
