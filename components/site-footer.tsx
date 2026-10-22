@@ -46,6 +46,11 @@ export function SiteFooter() {
               </Link>
             </li>
             <li>
+              <Link href="/vorstand/" className="transition hover:text-white">
+                Der Vorstand
+              </Link>
+            </li>
+            <li>
               <Link href="/platzordnung/" className="transition hover:text-white">
                 Platzordnung
               </Link>

@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/kontakt",
     "/mitgliedschaft",
     "/platzordnung",
+    "/vorstand",
   ];
 
   const disciplineRoutes = disciplines.map((d) => `/trainingsangebote/${d.slug}`);

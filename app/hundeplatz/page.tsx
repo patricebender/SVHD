@@ -98,8 +98,8 @@ export default function HundeplatzPage() {
         <div className="eyebrow">Impressionen</div>
         <h2 className="text-2xl lg:text-3xl">Unsere Hunde auf dem Platz</h2>
         <p className="mt-3 max-w-2xl text-foreground/70">
-          Ob auf dem Laufsteg, der Rampe oder beim Balancieren, auf unseren
-          Geräten ist für jedes Team etwas dabei.
+          Ein paar Eindrücke von unseren Hunden und ihren Teams auf dem
+          Trainingsplatz.
         </p>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-soft">

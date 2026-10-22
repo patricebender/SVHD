@@ -20,8 +20,8 @@ export default function HomePage() {
           </h1>
           <p className="mt-5 max-w-2xl text-lg text-white/80">
             Wir bilden Deinen Hund zu sicheren Begleit- und Sporthunden aus, für
-            alle Rassen, auch für Nichtmitglieder. Agility, IGP, Begleithund­prüfung,
-            Welpentraining und mehr.
+            alle Rassen. Agility, IGP, Begleithund­prüfung, Welpentraining und
+            mehr.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/mitgliedschaft/" className="btn-primary">
