@@ -66,10 +66,11 @@ export default function HomePage() {
           </div>
           <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-soft">
             <Image
-              src="https://images.unsplash.com/photo-1605897472359-85e4b94d685d?auto=format&fit=crop&w=1200&q=70"
-              alt="Hund und Halterin beim Training auf dem Vereinsgelände"
+              src="/training/gsd-daisies.webp"
+              alt="Deutscher Schäferhund auf dem Vereinsgelände"
               fill
               className="object-cover"
+              sizes="(min-width: 1024px) 50vw, 100vw"
             />
           </div>
         </div>

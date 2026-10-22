@@ -42,7 +42,7 @@ export default function TrainingsangebotePage() {
       </section>
 
       {/* Trainingszeiten */}
-      <section className="container-page py-14 lg:py-16">
+      <section id="trainingszeiten" className="container-page py-14 lg:py-16 scroll-mt-24">
         <div className="eyebrow">Trainingszeiten</div>
         <h2 className="text-2xl lg:text-3xl">Wöchentlicher Überblick</h2>
         <p className="mt-3 max-w-2xl text-sm text-foreground/70">
@@ -61,7 +61,37 @@ export default function TrainingsangebotePage() {
               <div className="bg-brand px-5 py-3 text-sm font-bold uppercase tracking-wider text-white">
                 {day.day}
               </div>
-              <table className="w-full text-left text-sm">
+
+              {/* Mobile: stacked cards (no horizontal overflow) */}
+              <ul className="divide-y divide-border sm:hidden">
+                {day.slots.map((slot) => (
+                  <li
+                    key={`${day.day}-${slot.time}-${slot.what}`}
+                    className="px-5 py-4"
+                  >
+                    {slot.slug ? (
+                      <Link
+                        href={`/trainingsangebote/${slot.slug}/`}
+                        className="font-medium text-brand hover:underline"
+                      >
+                        {slot.what}
+                      </Link>
+                    ) : (
+                      <p className="font-medium text-brand-dark">{slot.what}</p>
+                    )}
+                    <p className="mt-1 text-sm tabular-nums text-foreground/80">
+                      {slot.time}
+                    </p>
+                    <p className="mt-1 text-sm text-foreground/60">
+                      <span className="text-foreground/50">Ansprechpartner/-in: </span>
+                      {slot.trainer}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Tablet and up: table */}
+              <table className="hidden w-full text-left text-sm sm:table">
                 <thead className="bg-muted text-foreground/60">
                   <tr>
                     <th className="px-5 py-2.5 font-semibold">Uhrzeit</th>
@@ -78,8 +108,17 @@ export default function TrainingsangebotePage() {
                       <td className="whitespace-nowrap px-5 py-3 tabular-nums text-foreground/80">
                         {slot.time}
                       </td>
-                      <td className="px-5 py-3 font-medium text-brand-dark">
-                        {slot.what}
+                      <td className="px-5 py-3 font-medium">
+                        {slot.slug ? (
+                          <Link
+                            href={`/trainingsangebote/${slot.slug}/`}
+                            className="text-brand hover:underline"
+                          >
+                            {slot.what}
+                          </Link>
+                        ) : (
+                          <span className="text-brand-dark">{slot.what}</span>
+                        )}
                       </td>
                       <td className="px-5 py-3 text-foreground/70">{slot.trainer}</td>
                     </tr>

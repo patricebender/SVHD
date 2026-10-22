@@ -9,7 +9,6 @@ const nextConfig = {
   images: {
     // Firebase Hosting has no Next image optimizer; serve images as-is.
     unoptimized: true,
-    remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],
   },
 };
 

@@ -9,7 +9,7 @@ export type Discipline = {
   /** Highlights shown as a bullet list on the subpage. */
   highlights: string[];
   trainer: { name: string; note?: string };
-  /** Placeholder image (Unsplash) until real photos are supplied. */
+  /** Discipline image (real photos from our Vereinsgelände). */
   image: string;
 };
 
@@ -31,8 +31,7 @@ export const disciplines: Discipline[] = [
       "Vorbereitung auf Agility-Turniere",
     ],
     trainer: { name: "Katrin Rempp, Ivonne Schäfer" },
-    image:
-      "https://images.unsplash.com/photo-1558929996-da64ba858215?auto=format&fit=crop&w=1200&q=70",
+    image: "/training/agility.webp",
   },
   {
     slug: "unterordnung",
@@ -51,8 +50,7 @@ export const disciplines: Discipline[] = [
       "Basis für Begleithundeprüfung und IGP",
     ],
     trainer: { name: "Kathrin Fischer" },
-    image:
-      "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=1200&q=70",
+    image: "/training/unterordnung.webp",
   },
   {
     slug: "rally-obedience",
@@ -71,8 +69,7 @@ export const disciplines: Discipline[] = [
       "Guter Einstieg in den Hundesport",
     ],
     trainer: { name: "Gaby Möll" },
-    image:
-      "https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1200&q=70",
+    image: "/training/rally-obedience.webp",
   },
   {
     slug: "hoopers",
@@ -91,8 +88,7 @@ export const disciplines: Discipline[] = [
       "Für Hunde jeden Alters und jeder Größe",
     ],
     trainer: { name: "Gaby Möll, Beate Horneck" },
-    image:
-      "https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=1200&q=70",
+    image: "/training/hoopers.webp",
   },
   {
     slug: "longieren",
@@ -111,8 +107,7 @@ export const disciplines: Discipline[] = [
       "Sonntags um 10 Uhr",
     ],
     trainer: { name: "Sabine Palm" },
-    image:
-      "https://images.unsplash.com/photo-1444212477490-ca407925329e?auto=format&fit=crop&w=1200&q=70",
+    image: "/training/longieren.webp",
   },
   {
     slug: "welpentraining",
@@ -131,8 +126,7 @@ export const disciplines: Discipline[] = [
       "Erste Signale und Impulskontrolle",
     ],
     trainer: { name: "Kathrin Fischer & Minttu Vainio" },
-    image:
-      "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1200&q=70",
+    image: "/training/welpentraining.webp",
   },
   {
     slug: "begleithundepruefung",
@@ -151,8 +145,7 @@ export const disciplines: Discipline[] = [
       "Prüfungsabnahme im Verein möglich",
     ],
     trainer: { name: "Nadja Trumpf" },
-    image:
-      "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&w=1200&q=70",
+    image: "/training/begleithundepruefung.webp",
   },
 ];
 
@@ -161,44 +154,50 @@ export function getDiscipline(slug: string) {
 }
 
 /** Weekly training schedule, grouped by day. */
-export type ScheduleSlot = { time: string; what: string; trainer: string };
+export type ScheduleSlot = {
+  time: string;
+  what: string;
+  trainer: string;
+  /** Discipline slug this slot belongs to, if it has a detail page. */
+  slug?: Discipline["slug"];
+};
 export const trainingSchedule: { day: string; slots: ScheduleSlot[] }[] = [
   {
     day: "Montag",
     slots: [
-      { time: "17:30 – 18:30 Uhr", what: "Rally Obedience", trainer: "Gaby Möll" },
-      { time: "17:30 – 18:30 Uhr", what: "Agility Anfänger", trainer: "Katrin Rempp" },
-      { time: "18:30 – 19:30 Uhr", what: "Agility Fun & Fortgeschrittene", trainer: "Katrin Rempp" },
+      { time: "17:30 – 18:30 Uhr", what: "Rally Obedience", trainer: "Gaby Möll", slug: "rally-obedience" },
+      { time: "17:30 – 18:30 Uhr", what: "Agility Anfänger", trainer: "Katrin Rempp", slug: "agility" },
+      { time: "18:30 – 19:30 Uhr", what: "Agility Fun & Fortgeschrittene", trainer: "Katrin Rempp", slug: "agility" },
     ],
   },
   {
     day: "Dienstag",
     slots: [
-      { time: "17:00 – 18:00 Uhr", what: "Hoopers Anfänger", trainer: "Gaby Möll" },
-      { time: "17:45 – 18:30 Uhr", what: "Welpenstunde (8–16 Wochen)", trainer: "Kathrin Fischer & Minttu Vainio" },
-      { time: "18:30 – 19:15 Uhr", what: "Welpenstunde (17–24 Wochen)", trainer: "Kathrin Fischer & Minttu Vainio" },
+      { time: "17:00 – 18:00 Uhr", what: "Hoopers Anfänger", trainer: "Gaby Möll", slug: "hoopers" },
+      { time: "17:45 – 18:30 Uhr", what: "Welpenstunde (8–16 Wochen)", trainer: "Kathrin Fischer & Minttu Vainio", slug: "welpentraining" },
+      { time: "18:30 – 19:15 Uhr", what: "Welpenstunde (17–24 Wochen)", trainer: "Kathrin Fischer & Minttu Vainio", slug: "welpentraining" },
     ],
   },
   {
     day: "Mittwoch",
     slots: [
-      { time: "17:00 – 20:00 Uhr", what: "Agility Anfänger & Fortgeschrittene", trainer: "Ivonne Schäfer" },
-      { time: "17:45 – 18:30 Uhr", what: "Unterordnung Anfänger", trainer: "Kathrin Fischer" },
-      { time: "18:30 – 19:15 Uhr", what: "Unterordnung Anfänger", trainer: "Kathrin Fischer" },
-      { time: "19:15 – 20:00 Uhr", what: "Unterordnung Fortgeschrittene", trainer: "Kathrin Fischer" },
+      { time: "17:00 – 20:00 Uhr", what: "Agility Anfänger & Fortgeschrittene", trainer: "Ivonne Schäfer", slug: "agility" },
+      { time: "17:45 – 18:30 Uhr", what: "Unterordnung Anfänger", trainer: "Kathrin Fischer", slug: "unterordnung" },
+      { time: "18:30 – 19:15 Uhr", what: "Unterordnung Anfänger", trainer: "Kathrin Fischer", slug: "unterordnung" },
+      { time: "19:15 – 20:00 Uhr", what: "Unterordnung Fortgeschrittene", trainer: "Kathrin Fischer", slug: "unterordnung" },
     ],
   },
   {
     day: "Donnerstag",
     slots: [
-      { time: "18:00 – 20:00 Uhr", what: "Training für Begleithundeprüfung", trainer: "Nadja Trumpf" },
+      { time: "18:00 – 20:00 Uhr", what: "Training für Begleithundeprüfung", trainer: "Nadja Trumpf", slug: "begleithundepruefung" },
     ],
   },
   {
     day: "Freitag",
     slots: [
-      { time: "17:00 – 17:30 Uhr", what: "Hoopers Anfänger", trainer: "Beate Horneck" },
-      { time: "17:30 – 18:00 Uhr", what: "Hoopers Fortgeschrittene", trainer: "Gaby Möll" },
+      { time: "17:00 – 17:30 Uhr", what: "Hoopers Anfänger", trainer: "Beate Horneck", slug: "hoopers" },
+      { time: "17:30 – 18:00 Uhr", what: "Hoopers Fortgeschrittene", trainer: "Gaby Möll", slug: "hoopers" },
     ],
   },
   {
@@ -210,10 +209,19 @@ export const trainingSchedule: { day: string; slots: ScheduleSlot[] }[] = [
   {
     day: "Sonntag",
     slots: [
-      { time: "10:00 Uhr", what: "Longieren", trainer: "Sabine Palm" },
+      { time: "10:00 Uhr", what: "Longieren", trainer: "Sabine Palm", slug: "longieren" },
     ],
   },
 ];
+
+/** All weekly slots for a discipline, with the day attached, in weekly order. */
+export function getScheduleForDiscipline(slug: Discipline["slug"]) {
+  return trainingSchedule.flatMap((day) =>
+    day.slots
+      .filter((slot) => slot.slug === slug)
+      .map((slot) => ({ day: day.day, ...slot })),
+  );
+}
 
 /** Notice shown on the training overview (capacity status). */
 export const trainingNotice = {

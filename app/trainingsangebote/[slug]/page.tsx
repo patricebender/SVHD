@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { disciplines, getDiscipline } from "@/lib/content";
+import { disciplines, getDiscipline, getScheduleForDiscipline } from "@/lib/content";
 
 export function generateStaticParams() {
   return disciplines.map((d) => ({ slug: d.slug }));
@@ -31,6 +31,8 @@ export default async function DisciplinePage({
   const { slug } = await params;
   const d = getDiscipline(slug);
   if (!d) notFound();
+
+  const slots = getScheduleForDiscipline(d.slug);
 
   return (
     <>
@@ -83,6 +85,39 @@ export default async function DisciplinePage({
           </div>
 
           <aside className="space-y-6">
+            {slots.length > 0 && (
+              <div className="card overflow-hidden p-0">
+                <div className="flex items-center gap-2 bg-brand px-5 py-3 text-sm font-bold uppercase tracking-wider text-white">
+                  <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
+                    <path fillRule="evenodd" d="M5.75 2a.75.75 0 0 1 .75.75V4h7V2.75a.75.75 0 0 1 1.5 0V4h.25A2.75 2.75 0 0 1 18 6.75v8.5A2.75 2.75 0 0 1 15.25 18H4.75A2.75 2.75 0 0 1 2 15.25v-8.5A2.75 2.75 0 0 1 4.75 4H5V2.75A.75.75 0 0 1 5.75 2Zm-1 5.5a.75.75 0 0 0-.75.75v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5a.75.75 0 0 0-.75-.75H4.75Z" clipRule="evenodd" />
+                  </svg>
+                  Trainingszeiten
+                </div>
+                <ul className="divide-y divide-border">
+                  {slots.map((slot, i) => (
+                    <li key={`${slot.day}-${slot.time}-${i}`} className="px-5 py-3">
+                      <p className="text-sm font-semibold text-brand-dark">
+                        {slot.day}
+                      </p>
+                      <p className="mt-0.5 text-sm tabular-nums text-foreground/80">
+                        {slot.time}
+                      </p>
+                      <p className="mt-0.5 text-xs text-foreground/60">
+                        {slot.what} · {slot.trainer}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+                <div className="border-t border-border bg-muted/50 px-5 py-3">
+                  <Link
+                    href="/trainingsangebote/#trainingszeiten"
+                    className="text-sm font-semibold text-brand hover:underline"
+                  >
+                    Zum vollständigen Wochenplan
+                  </Link>
+                </div>
+              </div>
+            )}
             <div className="card">
               <h3 className="text-base text-brand-dark">Ansprechpartner</h3>
               <p className="mt-2 text-sm font-semibold text-foreground">{d.trainer.name}</p>

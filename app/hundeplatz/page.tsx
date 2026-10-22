@@ -93,6 +93,45 @@ export default function HundeplatzPage() {
         </div>
       </section>
 
+      {/* Impressionen vom Platz */}
+      <section className="container-page pb-6">
+        <div className="eyebrow">Impressionen</div>
+        <h2 className="text-2xl lg:text-3xl">Unsere Hunde auf dem Platz</h2>
+        <p className="mt-3 max-w-2xl text-foreground/70">
+          Ob auf dem Laufsteg, der Rampe oder beim Balancieren, auf unseren
+          Geräten ist für jedes Team etwas dabei.
+        </p>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-soft">
+            <Image
+              src="/hundeplatz/husky-laufsteg.webp"
+              alt="Husky auf dem Laufsteg unseres Agility-Parcours"
+              fill
+              className="object-cover"
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            />
+          </div>
+          <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-soft">
+            <Image
+              src="/hundeplatz/husky-rampe.webp"
+              alt="Husky balanciert auf einem Balance-Board auf dem Vereinsgelände"
+              fill
+              className="object-cover"
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            />
+          </div>
+          <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-soft sm:col-span-2 sm:aspect-[16/9] lg:col-span-1 lg:aspect-[3/4]">
+            <Image
+              src="/hundeplatz/husky-sonnenuntergang.webp"
+              alt="Husky auf dem Trainingsplatz bei Sonnenuntergang"
+              fill
+              className="object-cover"
+              sizes="(min-width: 1024px) 33vw, 100vw"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Anfahrt */}
       <section className="bg-muted py-14 lg:py-20">
         <div className="container-page">
