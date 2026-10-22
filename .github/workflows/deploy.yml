@@ -33,3 +33,7 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           channelId: live
           projectId: svhd-1c545
+          # Pin the CLI: 15.34.1 added a serviceusage.services.get preflight
+          # that the Admin-SDK service account lacks. 15.34.0 deploys fine with
+          # the same credential (as cabo-web does).
+          firebaseToolsVersion: "15.34.0"
