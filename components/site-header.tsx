@@ -5,14 +5,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { navItems } from "@/lib/nav";
 import { siteConfig } from "@/lib/site";
+import { EventBanner } from "@/components/event-banner";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [openSub, setOpenSub] = useState<string | null>(null);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-white/90 backdrop-blur-md">
-      <div className="container-page flex h-16 items-center justify-between gap-4 lg:h-20">
+    <>
+      {/* Promo bar — advertises the next Termin and collapses into the nav on
+          scroll (it is not sticky, unlike the nav below it). */}
+      <EventBanner />
+
+      <header className="sticky top-0 z-50 border-b border-border bg-white/90 backdrop-blur-md">
+        <div className="container-page flex h-16 items-center justify-between gap-4 lg:h-20">
         {/* Logo + name */}
         <Link
           href="/"
@@ -168,6 +174,7 @@ export function SiteHeader() {
           </div>
         </nav>
       )}
-    </header>
+      </header>
+    </>
   );
 }
