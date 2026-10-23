@@ -66,22 +66,39 @@ export default async function DisciplinePage({
       {/* Body */}
       <section className="container-page py-16 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr]">
-          <div className="prose-club">
-            {d.body.map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
+          <div>
+            <div className="grid gap-8 md:grid-cols-2 md:items-start">
+              <div className="prose-club">
+                <h2 className="mb-4 text-2xl">Das erwartet Euch</h2>
+                <ul>
+                  {d.highlights.map((h) => (
+                    <li key={h}>
+                      <svg className="mt-1 h-4 w-4 flex-none text-brand" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
+                        <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clipRule="evenodd" />
+                      </svg>
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-            <h2 className="mb-4 mt-10 text-2xl">Das erwartet Euch</h2>
-            <ul>
-              {d.highlights.map((h) => (
-                <li key={h}>
-                  <svg className="mt-1 h-4 w-4 flex-none text-brand" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
-                    <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clipRule="evenodd" />
-                  </svg>
-                  <span>{h}</span>
-                </li>
-              ))}
-            </ul>
+              <div className="prose-club">
+                {d.body.map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-2xl shadow-soft">
+              <Image
+                src={d.image}
+                alt={d.title}
+                fill
+                className="object-cover"
+                style={{ objectPosition: d.imagePositionDetail ?? d.imagePosition }}
+                sizes="(min-width: 1024px) 60vw, 100vw"
+              />
+            </div>
           </div>
 
           <aside className="space-y-6">

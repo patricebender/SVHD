@@ -11,6 +11,10 @@ export type Discipline = {
   trainer: { name: string; note?: string };
   /** Discipline image (real photos from our Vereinsgelände). */
   image: string;
+  /** Optional object-position for the image crop in grids/cards (e.g. "center 30%"). */
+  imagePosition?: string;
+  /** Optional object-position for the wider detail-page image; falls back to imagePosition. */
+  imagePositionDetail?: string;
 };
 
 export const disciplines: Discipline[] = [
@@ -51,6 +55,8 @@ export const disciplines: Discipline[] = [
     ],
     trainer: { name: "Kathrin Fischer" },
     image: "/training/unterordnung.webp",
+    imagePosition: "center 30%",
+    imagePositionDetail: "center 27%",
   },
   {
     slug: "rally-obedience",

@@ -130,6 +130,15 @@ export default function HundeplatzPage() {
             />
           </div>
         </div>
+        <div className="relative mt-4 aspect-[16/9] overflow-hidden rounded-2xl shadow-soft lg:aspect-[21/9]">
+          <Image
+            src="/hundeplatz/hundeplatz-nacht.webp"
+            alt="Training unter Flutlicht auf dem Hundeplatz in der Abenddämmerung"
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+        </div>
       </section>
 
       {/* Anfahrt */}

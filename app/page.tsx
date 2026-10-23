@@ -156,6 +156,7 @@ export default function HomePage() {
                     alt={d.title}
                     fill
                     className="object-cover transition duration-300 group-hover:scale-105"
+                    style={{ objectPosition: d.imagePosition }}
                   />
                 </div>
                 <h3 className="text-xl text-brand-dark">{d.title}</h3>
