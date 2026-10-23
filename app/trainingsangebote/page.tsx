@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { PageHero } from "@/components/page-hero";
+import { DisciplineGallery } from "@/components/discipline-gallery";
 import {
-  disciplines,
   trainingSchedule,
   trainingNotice,
   trainingRequirements,
@@ -140,33 +139,8 @@ export default function TrainingsangebotePage() {
         <div className="container-page">
           <div className="eyebrow">Disziplinen</div>
           <h2 className="text-2xl lg:text-3xl">Unsere Angebote im Detail</h2>
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {disciplines.map((d) => (
-              <Link
-                key={d.slug}
-                href={`/trainingsangebote/${d.slug}/`}
-                className="group card flex flex-col"
-              >
-                <div className="relative mb-4 aspect-[16/10] overflow-hidden rounded-xl">
-                  <Image
-                    src={d.image}
-                    alt={d.title}
-                    fill
-                    className="object-cover transition duration-300 group-hover:scale-105"
-                    style={{ objectPosition: d.imagePosition }}
-                  />
-                </div>
-                <h3 className="text-xl text-brand-dark">{d.title}</h3>
-                <p className="mt-1 text-sm font-medium text-brand">{d.tagline}</p>
-                <p className="mt-2 flex-1 text-sm text-foreground/70">{d.summary}</p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand">
-                  Zur Disziplin
-                  <svg className="h-4 w-4 transition group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z" clipRule="evenodd" />
-                  </svg>
-                </span>
-              </Link>
-            ))}
+          <div className="mt-8">
+            <DisciplineGallery showTagline cta="Zur Disziplin" />
           </div>
         </div>
       </section>
