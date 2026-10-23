@@ -39,7 +39,7 @@ function buildSlides(today: string | null): Slide[] {
       href: "/terminkalender/",
       text: `Nächster Termin · ${fmtDate(nextEvent.date)}${
         nextEvent.time ? ` · ${nextEvent.time}` : ""
-      } — ${nextEvent.title}`,
+      } · ${nextEvent.title}`,
     });
   }
 
