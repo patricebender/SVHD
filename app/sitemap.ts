@@ -18,6 +18,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/mitgliedschaft",
     "/platzordnung",
     "/vorstand",
+    "/impressum",
+    "/datenschutz",
   ];
 
   const disciplineRoutes = disciplines.map((d) => `/trainingsangebote/${d.slug}`);

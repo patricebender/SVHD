@@ -56,9 +56,8 @@ export default function MitgliedschaftPage() {
             <div className="prose-club mt-4">
               <p>
                 Gerne kannst Du auch ohne Mitgliedschaft für ein Schnuppertraining
-                vorbeischauen. Melde Dich einfach kurz bei uns, einen Kontakt
-                findest Du{" "}
-                <Link href="/kontakt/">hier</Link>.
+                vorbeischauen. Melde Dich einfach kurz über unsere{" "}
+                <Link href="/kontakt/">Kontaktseite</Link>.
               </p>
             </div>
 

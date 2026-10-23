@@ -25,7 +25,7 @@ export default function HundeplatzPage() {
         <div className="relative aspect-video w-full overflow-hidden rounded-3xl border border-border bg-brand-ink">
           <HeroVideo className="absolute inset-0 h-full w-full object-cover" />
         </div>
-        <p className="mt-3 text-center text-sm text-foreground/60">
+        <p className="mt-3 text-center text-sm text-foreground/70">
           Rundflug über unseren Hundeplatz
         </p>
       </section>
@@ -54,7 +54,7 @@ export default function HundeplatzPage() {
 
           <div className="relative aspect-[16/9] overflow-hidden rounded-3xl shadow-soft">
             <Image
-              src="/hundeplatz/gelaende.jpg"
+              src="/hundeplatz/gelaende.webp"
               alt="Luftaufnahme unseres Vereinsgeländes mit Trainingsplatz, umgeben von Feldern und Wasser"
               fill
               className="object-cover"

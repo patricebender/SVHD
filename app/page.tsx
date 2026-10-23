@@ -70,8 +70,8 @@ export default function HomePage() {
                   Begleithundeprüfung
                 </Link>{" "}
                 vorbereiten. Eine vollständige Übersicht unseres
-                Trainingsangebots findet ihr{" "}
-                <Link href="/trainingsangebote/">hier</Link>.
+                Trainingsangebots findet ihr in unseren{" "}
+                <Link href="/trainingsangebote/">Trainingsangeboten</Link>.
               </p>
               <p>
                 <strong>Auch Nichtmitglieder</strong> können mit ihrem Hund,
@@ -99,7 +99,7 @@ export default function HomePage() {
         <div className="container-page grid items-center gap-10 py-14 lg:grid-cols-2 lg:py-20">
           <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-soft lg:aspect-[16/11]">
             <Image
-              src="/hundeplatz/gelaende.jpg"
+              src="/hundeplatz/gelaende.webp"
               alt="Luftaufnahme unseres Vereinsgeländes mit Trainingsplatz am Wasser"
               fill
               className="object-cover"
@@ -155,6 +155,7 @@ export default function HomePage() {
                     src={d.image}
                     alt={d.title}
                     fill
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     className="object-cover transition duration-300 group-hover:scale-105"
                     style={{ objectPosition: d.imagePosition }}
                   />
@@ -223,7 +224,7 @@ export default function HomePage() {
           <h2 className="text-3xl text-white lg:text-4xl">
             Lerne uns unverbindlich kennen
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-white/85">
+          <p className="mx-auto mt-4 max-w-xl text-white/95">
             Du bist nach vorheriger Anmeldung herzlich zu einem Schnuppertraining
             eingeladen. So lernst Du unser Angebot und unsere Trainerinnen in Ruhe
             kennen.

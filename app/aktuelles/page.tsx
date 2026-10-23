@@ -127,7 +127,7 @@ export default function AktuellesPage() {
                     </span>
                     <time
                       dateTime={n.date}
-                      className="text-xs font-semibold uppercase tracking-wider text-foreground/50"
+                      className="text-xs font-semibold uppercase tracking-wider text-foreground/70"
                     >
                       {fmtDate(n.date)}
                     </time>
@@ -179,7 +179,7 @@ export default function AktuellesPage() {
             ))}
           </div>
 
-          <p className="mt-10 text-sm text-foreground/60">
+          <p className="mt-10 text-sm text-foreground/70">
             Kurzfristige Änderungen geben wir über unser Forum und Instagram bekannt.{" "}
             <Link href="/kontakt/" className="font-semibold text-brand hover:underline">
               Zum Kontakt.

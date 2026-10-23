@@ -82,8 +82,8 @@ export default function TrainingsangebotePage() {
                     <p className="mt-1 text-sm tabular-nums text-foreground/80">
                       {slot.time}
                     </p>
-                    <p className="mt-1 text-sm text-foreground/60">
-                      <span className="text-foreground/50">Ansprechpartner/-in: </span>
+                    <p className="mt-1 text-sm text-foreground/70">
+                      <span className="text-foreground/70">Ansprechpartner/-in: </span>
                       {slot.trainer}
                     </p>
                   </li>
@@ -97,7 +97,7 @@ export default function TrainingsangebotePage() {
                   <col className="w-[42%]" />
                   <col className="w-[30%]" />
                 </colgroup>
-                <thead className="bg-muted text-foreground/60">
+                <thead className="bg-muted text-foreground/70">
                   <tr>
                     <th className="px-5 py-2.5 font-semibold">Uhrzeit</th>
                     <th className="px-5 py-2.5 font-semibold">Angebot</th>

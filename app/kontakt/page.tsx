@@ -31,7 +31,7 @@ export default function KontaktPage() {
               </p>
               <dl className="mt-5 space-y-3 border-t border-border pt-5 text-sm">
                 <div className="flex gap-3">
-                  <dt className="w-28 flex-none font-semibold text-foreground/60">
+                  <dt className="w-28 flex-none font-semibold text-foreground/70">
                     Vereinsheim
                   </dt>
                   <dd>
@@ -51,13 +51,13 @@ export default function KontaktPage() {
               </p>
               <dl className="mt-4 space-y-3 text-sm">
                 <div className="flex gap-3">
-                  <dt className="w-28 flex-none font-semibold text-foreground/60">
+                  <dt className="w-28 flex-none font-semibold text-foreground/70">
                     Kontakt
                   </dt>
                   <dd className="font-medium text-foreground">{contact.anmeldung.name}</dd>
                 </div>
                 <div className="flex gap-3">
-                  <dt className="w-28 flex-none font-semibold text-foreground/60">
+                  <dt className="w-28 flex-none font-semibold text-foreground/70">
                     SMS / Telefon
                   </dt>
                   <dd>
@@ -67,7 +67,7 @@ export default function KontaktPage() {
                   </dd>
                 </div>
                 <div className="flex gap-3">
-                  <dt className="w-28 flex-none font-semibold text-foreground/60">
+                  <dt className="w-28 flex-none font-semibold text-foreground/70">
                     E-Mail
                   </dt>
                   <dd>

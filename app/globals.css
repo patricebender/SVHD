@@ -9,8 +9,8 @@
    same hue (~202°) for a cohesive, accessible scale.
    ========================================================= */
 @theme {
-  --color-brand:        #0080c9;  /* Logo-Blau, Hauptfarbe */
-  --color-brand-hover:  #0067a3;  /* darker shade for hover/active */
+  --color-brand:        #0067a3;  /* interactive blue (WCAG-AA on white, 6:1) — darkened from logo #0080c9 */
+  --color-brand-hover:  #00557f;  /* deeper shade for hover/active */
   --color-brand-dark:   #00456b;  /* deep navy for headings on light */
   --color-brand-light:  #e6f3fb;  /* very light tint - surfaces */
   --color-brand-mid:    #5bb3e0;  /* mid tint - accents */

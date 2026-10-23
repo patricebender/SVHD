@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Schäferhundeverein Heidelberg & Dossenheim e.V.",
   shortName: "SV OG Heidelberg & Dossenheim",
   slogan: "Verein für Deutsche Schäferhunde",
-  domain: "schaeferhundeverein-heidelberg.com",
+  domain: "schaeferhundeverein-heidelberg.de",
   description:
     "Verein für Deutsche Schäferhunde, Ortsgruppe Heidelberg & Dossenheim e.V. (gegr. 1922). Hundesport, Agility, IGP, Begleithundeprüfung, Welpentraining und mehr. Hunde aller Rassen willkommen, auch Nichtmitglieder.",
   color: "#0080c9",
@@ -19,6 +19,7 @@ export const contact = {
   // Vereinsheim
   phone: "06221 - 47 55 65",
   phoneHref: "tel:+4962214755 65".replace(/\s/g, ""),
+  email: "info@schaeferhundeverein-heidelberg.de",
   // Anmeldung / Kontakt Kathrin Fischer
   sms: "+49 175 5245250",
   smsHref: "sms:+491755245250",
@@ -26,6 +27,6 @@ export const contact = {
     name: "Kathrin Fischer",
     phone: "0175 / 524 52 50",
     phoneHref: "tel:+491755245250",
-    email: "k.fischer@hotmail.com",
+    email: "k.fischer@schaeferhundeverein-heidelberg.de",
   },
 } as const;

@@ -32,7 +32,7 @@ export default function TerminkalenderPage() {
       <section className="container-page py-16 lg:py-20">
         <EventTimeline events={events} />
 
-        <p className="mt-8 text-sm text-foreground/60">
+        <p className="mt-8 text-sm text-foreground/70">
           Vergangene Termine sind ausgegraut, der nächste Termin ist
           hervorgehoben. Scrolle nach oben, um zurückliegende Veranstaltungen zu
           sehen.
@@ -58,7 +58,7 @@ export default function TerminkalenderPage() {
                 className="rounded-xl border border-border bg-white px-4 py-3 text-center"
               >
                 <span className="block text-xl font-bold text-brand">{fmtDay(w)}</span>
-                <span className="block text-xs font-semibold uppercase tracking-wider text-foreground/60">
+                <span className="block text-xs font-semibold uppercase tracking-wider text-foreground/70">
                   {fmtMonth(w)}
                 </span>
               </div>

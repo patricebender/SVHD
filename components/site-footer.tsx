@@ -112,10 +112,10 @@ export function SiteFooter() {
             © {year} {siteConfig.name}
           </p>
           <div className="flex gap-5">
-            <Link href="/kontakt/" className="hover:text-white/80">
+            <Link href="/impressum/" className="hover:text-white/80">
               Impressum
             </Link>
-            <Link href="/kontakt/" className="hover:text-white/80">
+            <Link href="/datenschutz/" className="hover:text-white/80">
               Datenschutz
             </Link>
           </div>

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { disciplines, getDiscipline, getScheduleForDiscipline } from "@/lib/content";
+import { CourseJsonLd } from "@/components/json-ld";
 
 export function generateStaticParams() {
   return disciplines.map((d) => ({ slug: d.slug }));
@@ -16,10 +17,33 @@ export async function generateMetadata({
   const { slug } = await params;
   const d = getDiscipline(slug);
   if (!d) return {};
+  const url = `/trainingsangebote/${d.slug}/`;
+  const description = `${d.tagline}. ${d.summary}`;
+  const images = [
+    {
+      url: d.image,
+      width: d.imageWidth,
+      height: d.imageHeight,
+      alt: `${d.title} beim Schäferhundeverein Heidelberg & Dossenheim`,
+    },
+  ];
   return {
     title: d.title,
-    description: `${d.tagline}. ${d.summary}`,
-    alternates: { canonical: `/trainingsangebote/${d.slug}/` },
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      url,
+      title: d.title,
+      description,
+      images,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: d.title,
+      description,
+      images: [d.image],
+    },
   };
 }
 
@@ -36,6 +60,7 @@ export default async function DisciplinePage({
 
   return (
     <>
+      <CourseJsonLd discipline={d} />
       {/* Hero */}
       <section className="relative overflow-hidden bg-brand-ink text-white">
         <Image
@@ -43,7 +68,9 @@ export default async function DisciplinePage({
           alt={d.title}
           fill
           priority
+          sizes="100vw"
           className="object-cover opacity-35"
+          style={{ objectPosition: d.imagePositionDetail ?? d.imagePosition }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-ink via-brand-ink/80 to-brand-ink/40" />
         <div className="container-page relative py-20 lg:py-28">
@@ -92,7 +119,7 @@ export default async function DisciplinePage({
             <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-2xl shadow-soft">
               <Image
                 src={d.image}
-                alt={d.title}
+                alt={`${d.title} Training auf dem Vereinsgelände in Heidelberg`}
                 fill
                 className="object-cover"
                 style={{ objectPosition: d.imagePositionDetail ?? d.imagePosition }}
@@ -119,7 +146,7 @@ export default async function DisciplinePage({
                       <p className="mt-0.5 text-sm tabular-nums text-foreground/80">
                         {slot.time}
                       </p>
-                      <p className="mt-0.5 text-xs text-foreground/60">
+                      <p className="mt-0.5 text-xs text-foreground/70">
                         {slot.what} · {slot.trainer}
                       </p>
                     </li>

@@ -31,7 +31,7 @@ export function SiteHeader() {
             <span className="text-sm font-bold text-brand-dark lg:text-base">
               SV Heidelberg &amp; Dossenheim
             </span>
-            <span className="text-[11px] font-medium text-foreground/60 lg:text-xs">
+            <span className="text-[11px] font-medium text-foreground/70 lg:text-xs">
               Verein für Deutsche Schäferhunde e.V.
             </span>
           </span>
@@ -121,7 +121,7 @@ export function SiteHeader() {
                   {item.children && (
                     <button
                       type="button"
-                      className="p-3 text-foreground/60"
+                      className="p-3 text-foreground/70"
                       aria-label={`${item.label} Untermenü`}
                       aria-expanded={openSub === item.href}
                       onClick={() =>

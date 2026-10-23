@@ -84,7 +84,7 @@ export function EventTimeline({ events }: { events: CalendarEvent[] }) {
                   <div className="flex flex-wrap items-center gap-2">
                     <h2 className="text-lg text-brand-dark">{e.title}</h2>
                     {isPast && (
-                      <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-foreground/50">
+                      <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-foreground/70">
                         vergangen
                       </span>
                     )}
@@ -94,7 +94,7 @@ export function EventTimeline({ events }: { events: CalendarEvent[] }) {
                       </span>
                     )}
                   </div>
-                  <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm text-foreground/60">
+                  <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm text-foreground/70">
                     {e.time && <span>{e.time}</span>}
                     {e.location && <span>{e.location}</span>}
                   </div>
@@ -105,7 +105,7 @@ export function EventTimeline({ events }: { events: CalendarEvent[] }) {
                   className="flex-none rounded-xl bg-muted px-4 py-2 text-center"
                 >
                   <span className="block text-2xl font-bold text-brand">{fmtDay(e.date)}</span>
-                  <span className="block text-xs font-semibold uppercase tracking-wider text-foreground/60">
+                  <span className="block text-xs font-semibold uppercase tracking-wider text-foreground/70">
                     {fmtMonth(e.date)}
                   </span>
                 </time>

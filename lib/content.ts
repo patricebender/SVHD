@@ -11,6 +11,9 @@ export type Discipline = {
   trainer: { name: string; note?: string };
   /** Discipline image (real photos from our Vereinsgelände). */
   image: string;
+  /** Intrinsic image size, used for accurate OpenGraph/Twitter previews. */
+  imageWidth: number;
+  imageHeight: number;
   /** Optional object-position for the image crop in grids/cards (e.g. "center 30%"). */
   imagePosition?: string;
   /** Optional object-position for the wider detail-page image; falls back to imagePosition. */
@@ -36,6 +39,8 @@ export const disciplines: Discipline[] = [
     ],
     trainer: { name: "Katrin Rempp, Ivonne Schäfer" },
     image: "/training/agility.webp",
+    imageWidth: 1600,
+    imageHeight: 1155,
   },
   {
     slug: "unterordnung",
@@ -55,6 +60,8 @@ export const disciplines: Discipline[] = [
     ],
     trainer: { name: "Kathrin Fischer" },
     image: "/training/unterordnung.webp",
+    imageWidth: 1066,
+    imageHeight: 1600,
     imagePosition: "center 30%",
     imagePositionDetail: "center 27%",
   },
@@ -76,6 +83,10 @@ export const disciplines: Discipline[] = [
     ],
     trainer: { name: "Gaby Möll" },
     image: "/training/rally-obedience.webp",
+    imageWidth: 720,
+    imageHeight: 1280,
+    // Portrait source (9:16); subject (Team) sitzt rechts unten – Crop dorthin ziehen.
+    imagePosition: "70% 58%",
   },
   {
     slug: "hoopers",
@@ -95,6 +106,8 @@ export const disciplines: Discipline[] = [
     ],
     trainer: { name: "Gaby Möll, Beate Horneck" },
     image: "/training/hoopers.webp",
+    imageWidth: 1600,
+    imageHeight: 1200,
   },
   {
     slug: "longieren",
@@ -114,6 +127,8 @@ export const disciplines: Discipline[] = [
     ],
     trainer: { name: "Sabine Palm" },
     image: "/training/longieren.webp",
+    imageWidth: 1600,
+    imageHeight: 1200,
   },
   {
     slug: "welpentraining",
@@ -133,6 +148,12 @@ export const disciplines: Discipline[] = [
     ],
     trainer: { name: "Kathrin Fischer & Minttu Vainio" },
     image: "/training/welpentraining.webp",
+    imageWidth: 1200,
+    imageHeight: 1600,
+    // Portrait source (3:4); Kopf des Welpen oben. Hero-Band ist sehr flach/breit,
+    // daher der Detail-Wert stärker nach oben gezogen als in den Karten.
+    imagePosition: "center 38%",
+    imagePositionDetail: "center 22%",
   },
   {
     slug: "begleithundepruefung",
@@ -152,6 +173,8 @@ export const disciplines: Discipline[] = [
     ],
     trainer: { name: "Nadja Trumpf" },
     image: "/training/begleithundepruefung.webp",
+    imageWidth: 1600,
+    imageHeight: 1111,
   },
 ];
 
@@ -326,7 +349,7 @@ export const events: {
     time: "ganztags",
     title: "LG Baden Delegiertenversammlung",
     location: "Öschelbronn",
-    note: "Freiwillige Teilnahme möglich, bitte frühzeitig über Kathrin Fischer voranmelden (0175 / 524 52 50 oder k.fischer@hotmail.com).",
+    note: "Freiwillige Teilnahme möglich, bitte frühzeitig über Kathrin Fischer voranmelden (0175 / 524 52 50 oder k.fischer@schaeferhundeverein-heidelberg.de).",
   },
   { date: "2026-03-21", time: "10:00 Uhr", title: "Arbeitseinsatz", location: "Vereinsgelände" },
   { date: "2026-04-19", time: "13:15 Uhr", title: "Sommertagszug, Teilnahme des Vereins", location: "Dossenheim" },
