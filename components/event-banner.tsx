@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { events, socialWalks, news } from "@/lib/content";
+import { events, news } from "@/lib/content";
 
 const ROTATE_MS = 6000;
 const ROLL_MS = 500;
@@ -31,6 +31,7 @@ function buildSlides(today: string | null): Slide[] {
 
   const nextEvent = today
     ? [...events]
+        .filter((e) => e.kind !== "walk")
         .sort((a, b) => a.date.localeCompare(b.date))
         .find((e) => e.date >= today)
     : null;
@@ -44,12 +45,15 @@ function buildSlides(today: string | null): Slide[] {
   }
 
   const nextWalk = today
-    ? [...socialWalks].sort().find((d) => d >= today)
+    ? [...events]
+        .filter((e) => e.kind === "walk")
+        .sort((a, b) => a.date.localeCompare(b.date))
+        .find((e) => e.date >= today)
     : null;
   if (nextWalk) {
     slides.push({
       href: "/terminkalender/",
-      text: `Nächster Social Walk · ${fmtDate(nextWalk)}`,
+      text: `Nächster Social Walk · ${fmtDate(nextWalk.date)}`,
     });
   }
 

@@ -1,14 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { CalendarEvent } from "@/lib/content";
 
-export type CalendarEvent = {
-  date: string;
-  time?: string;
-  title: string;
-  location?: string;
-  note?: string;
-};
+export type { CalendarEvent };
+
+type Filter = "all" | "events" | "walks";
+
+const FILTERS: { id: Filter; label: string }[] = [
+  { id: "all", label: "Alle" },
+  { id: "events", label: "Veranstaltungen" },
+  { id: "walks", label: "Social Walks" },
+];
 
 function fmtDay(iso: string) {
   return new Date(iso).toLocaleDateString("de-DE", { day: "2-digit" });
@@ -27,11 +30,10 @@ function fmtMonth(iso: string) {
  * avoid a hydration mismatch.
  */
 export function EventTimeline({ events }: { events: CalendarEvent[] }) {
-  const sorted = [...events].sort((a, b) => a.date.localeCompare(b.date));
-
   const scrollRef = useRef<HTMLOListElement>(null);
   const nextRef = useRef<HTMLLIElement>(null);
   const [today, setToday] = useState<string | null>(null);
+  const [filter, setFilter] = useState<Filter>("all");
 
   useEffect(() => {
     const now = new Date();
@@ -39,7 +41,17 @@ export function EventTimeline({ events }: { events: CalendarEvent[] }) {
     setToday(now.toISOString().slice(0, 10));
   }, []);
 
-  // Index of the first event that is today or later.
+  const sorted = [...events]
+    .filter((e) =>
+      filter === "all"
+        ? true
+        : filter === "walks"
+          ? e.kind === "walk"
+          : e.kind !== "walk",
+    )
+    .sort((a, b) => a.date.localeCompare(b.date));
+
+  // Index of the first (filtered) event that is today or later.
   const nextIndex = today
     ? sorted.findIndex((e) => e.date >= today)
     : -1;
@@ -51,12 +63,33 @@ export function EventTimeline({ events }: { events: CalendarEvent[] }) {
     if (!container || !target) return;
     // Scroll the next event to the top of the container (not the page).
     container.scrollTop = target.offsetTop - container.offsetTop;
-  }, [today]);
+  }, [today, filter]);
 
   return (
-    <div className="relative">
-      <ol
-        ref={scrollRef}
+    <div>
+      <div className="mb-6 flex flex-wrap gap-2">
+        {FILTERS.map((f) => {
+          const active = filter === f.id;
+          return (
+            <button
+              key={f.id}
+              type="button"
+              onClick={() => setFilter(f.id)}
+              aria-pressed={active}
+              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                active
+                  ? "bg-brand text-white"
+                  : "bg-muted text-foreground/70 hover:bg-muted/70 hover:text-foreground"
+              }`}
+            >
+              {f.label}
+            </button>
+          );
+        })}
+      </div>
+      <div className="relative">
+        <ol
+          ref={scrollRef}
         className="no-scrollbar relative max-h-[32rem] space-y-3 overflow-y-auto scroll-smooth py-1 pl-8 pr-1"
       >
         {/* vertical rail (inside the padding so it never clips) */}
@@ -117,6 +150,7 @@ export function EventTimeline({ events }: { events: CalendarEvent[] }) {
       {/* Fade hints that there is more above/below. */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-white to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-white to-transparent" />
+      </div>
     </div>
   );
 }

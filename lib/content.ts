@@ -336,13 +336,17 @@ export const news: {
 ];
 
 /** Calendar events 2026. */
-export const events: {
+export type CalendarEvent = {
   date: string;
   time?: string;
   title: string;
   location?: string;
   note?: string;
-}[] = [
+  /** "walk" marks a Social Walk (recurring series); undefined is a normal Termin. */
+  kind?: "walk";
+};
+
+const baseEvents: CalendarEvent[] = [
   { date: "2026-01-25", time: "16:00 Uhr", title: "Jahreshauptversammlung", location: "Vereinsgelände" },
   {
     date: "2026-03-01",
@@ -375,8 +379,14 @@ export const events: {
   { date: "2026-12-12", time: "16:00 Uhr", title: "Jahresabschluss bei Glühwein und Imbiss", location: "Vereinsgelände" },
 ];
 
-/** Social Walk dates 2026, led by Kathrin Fischer. */
-export const socialWalks: string[] = [
+/**
+ * Social Walk dates 2026, led by Kathrin Fischer. The series repeats monthly;
+ * only the date is fixed ahead, the start location is announced per E-Mail
+ * before each walk. Kept as a compact list for easy editing, then turned into
+ * full calendar events below so they flow through the same timeline as the
+ * other Termine.
+ */
+const socialWalkDates: string[] = [
   "2026-01-30",
   "2026-02-27",
   "2026-03-27",
@@ -386,4 +396,18 @@ export const socialWalks: string[] = [
   "2026-09-25",
   "2026-10-30",
   "2026-11-27",
+];
+
+/** All calendar events: regular Termine plus the Social Walk series, one source. */
+export const events: CalendarEvent[] = [
+  ...baseEvents,
+  ...socialWalkDates.map(
+    (date): CalendarEvent => ({
+      date,
+      title: "Social Walk",
+      location: "Startort wird per E-Mail bekannt gegeben",
+      note: "Monatliche Gassirunde in der Gruppe mit Kathrin Fischer.",
+      kind: "walk",
+    }),
+  ),
 ];
