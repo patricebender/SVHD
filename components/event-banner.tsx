@@ -44,7 +44,9 @@ function buildSlides(today: string | null): Slide[] {
     : null;
   if (nextEvent) {
     slides.push({
-      href: "/terminkalender/",
+      // Carry the filter so the calendar scrolls to the next Veranstaltung,
+      // not whatever event (possibly a Social Walk) happens to come first.
+      href: "/terminkalender/?filter=events",
       lead: `Nächster Termin · ${fmtDate(nextEvent.date)}`,
       detail: nextEvent.time,
       title: nextEvent.title,
@@ -59,7 +61,7 @@ function buildSlides(today: string | null): Slide[] {
     : null;
   if (nextWalk) {
     slides.push({
-      href: "/terminkalender/",
+      href: "/terminkalender/?filter=walks",
       lead: "Nächster Social Walk",
       title: fmtDate(nextWalk.date),
     });

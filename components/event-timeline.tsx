@@ -44,6 +44,13 @@ export function EventTimeline({ events }: { events: CalendarEvent[] }) {
     const m = String(now.getMonth() + 1).padStart(2, "0");
     const d = String(now.getDate()).padStart(2, "0");
     setToday(`${y}-${m}-${d}`);
+
+    // Honor ?filter=events|walks from the banner so the calendar opens on the
+    // list the user clicked (and auto-scrolls to its next entry). Read from
+    // window rather than useSearchParams to avoid a Suspense boundary in this
+    // statically exported page.
+    const q = new URLSearchParams(window.location.search).get("filter");
+    if (q === "events" || q === "walks") setFilter(q);
   }, []);
 
   const sorted = [...events]
@@ -95,7 +102,7 @@ export function EventTimeline({ events }: { events: CalendarEvent[] }) {
       <div className="relative">
         <ol
           ref={scrollRef}
-        className="no-scrollbar relative max-h-[32rem] space-y-3 overflow-y-auto scroll-smooth py-1 pl-8 pr-1"
+        className="no-scrollbar relative max-h-[40rem] space-y-3 overflow-y-auto scroll-smooth pt-1 pb-10 pl-8 pr-1"
       >
         {/* vertical rail (inside the padding so it never clips) */}
         <span className="pointer-events-none absolute inset-y-1 left-[3px] w-px bg-border" aria-hidden />
