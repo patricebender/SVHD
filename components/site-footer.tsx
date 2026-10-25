@@ -62,7 +62,7 @@ export function SiteFooter() {
                 rel="noopener noreferrer"
                 className="transition hover:text-white"
               >
-                SV Bundesverband
+                SV Hauptverein
               </a>
             </li>
           </ul>
