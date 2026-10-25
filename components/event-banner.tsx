@@ -8,13 +8,20 @@ const ROTATE_MS = 6000;
 const ROLL_MS = 500;
 
 function fmtDate(iso: string) {
-  return new Date(iso).toLocaleDateString("de-DE", {
+  // Parse as local time (append T00:00:00) so the day isn't shifted by the
+  // UTC offset when rendered.
+  return new Date(`${iso}T00:00:00`).toLocaleDateString("de-DE", {
     day: "2-digit",
     month: "long",
   });
 }
 
-type Slide = { href: string; text: string };
+/**
+ * A slide's text is split so secondary detail (currently the event time) can be
+ * dropped on narrow screens, keeping the essential label + date + title on one
+ * line instead of truncating the title mid-word.
+ */
+type Slide = { href: string; lead: string; detail?: string; title: string };
 
 /**
  * Build the rotating slides. "Today" is resolved in the browser (the site is
@@ -38,9 +45,9 @@ function buildSlides(today: string | null): Slide[] {
   if (nextEvent) {
     slides.push({
       href: "/terminkalender/",
-      text: `Nächster Termin · ${fmtDate(nextEvent.date)}${
-        nextEvent.time ? ` · ${nextEvent.time}` : ""
-      } · ${nextEvent.title}`,
+      lead: `Nächster Termin · ${fmtDate(nextEvent.date)}`,
+      detail: nextEvent.time,
+      title: nextEvent.title,
     });
   }
 
@@ -53,13 +60,14 @@ function buildSlides(today: string | null): Slide[] {
   if (nextWalk) {
     slides.push({
       href: "/terminkalender/",
-      text: `Nächster Social Walk · ${fmtDate(nextWalk.date)}`,
+      lead: "Nächster Social Walk",
+      title: fmtDate(nextWalk.date),
     });
   }
 
   const latest = [...news].sort((a, b) => b.date.localeCompare(a.date))[0];
   if (latest) {
-    slides.push({ href: "/aktuelles/", text: `Aktuelles · ${latest.title}` });
+    slides.push({ href: "/aktuelles/", lead: "Aktuelles", title: latest.title });
   }
 
   return slides;
@@ -88,9 +96,15 @@ export function EventBanner() {
   const reducedMotion = useRef(false);
 
   useEffect(() => {
+    // Build the YYYY-MM-DD string from local date parts. Going through
+    // toISOString() would convert to UTC and, east of Greenwich, roll back to
+    // the previous day — making "today" lag and the next Termin stick on a
+    // date that has already passed.
     const now = new Date();
-    now.setHours(0, 0, 0, 0);
-    setToday(now.toISOString().slice(0, 10));
+    const y = now.getFullYear();
+    const m = String(now.getMonth() + 1).padStart(2, "0");
+    const d = String(now.getDate()).padStart(2, "0");
+    setToday(`${y}-${m}-${d}`);
   }, []);
 
   // Track reduced-motion preference.
@@ -194,7 +208,14 @@ function Slide({ slide }: { slide: Slide }) {
         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-mid [animation-duration:2.5s]" />
         <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand-mid" />
       </span>
-      <span className="truncate">{slide.text}</span>
+      <span className="truncate">
+        {slide.lead}
+        {slide.detail && (
+          <span className="hidden sm:inline"> · {slide.detail}</span>
+        )}
+        {" · "}
+        {slide.title}
+      </span>
     </Link>
   );
 }

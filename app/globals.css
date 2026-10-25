@@ -50,6 +50,9 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    /* Guard against any single element forcing horizontal scroll on narrow
+       viewports; the layout is column-based and never scrolls sideways. */
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4 {

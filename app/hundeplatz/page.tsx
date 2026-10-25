@@ -7,7 +7,7 @@ import { HeroVideo } from "@/components/hero-video";
 export const metadata: Metadata = {
   title: "Unser Hundeplatz",
   description:
-    "Unser Vereinsgelände in Heidelberg: ein großer Trainingsplatz mit Geräten, Vereinsheim und Terrasse. Mitglieder können den Platz unter Beachtung der Platzordnung auch außerhalb der Trainingszeiten nutzen.",
+    "Unser Vereinsgelände in Heidelberg: ein großer Trainingsplatz mit Geräten, Vereinsheim und Terrasse. Mitglieder können den Platz nach Absprache und unter Einhaltung der Platzordnung auch außerhalb der Trainingszeiten nutzen.",
   alternates: { canonical: "/hundeplatz/" },
 };
 
@@ -42,9 +42,9 @@ export default function HundeplatzPage() {
                 weiteren Disziplinen.
               </p>
               <p>
-                <strong>Mitglieder haben jederzeit Zugriff</strong> und können den
-                Platz unter Beachtung der Platzordnung auch außerhalb der
-                Trainingszeiten zum Trainieren nutzen.
+                Nach einer gewissen Zeit im Verein können Mitglieder den Platz{" "}
+                <strong>nach Absprache</strong> auch außerhalb der Trainingszeiten
+                zum Trainieren nutzen – unter Einhaltung der Platzordnung.
               </p>
             </div>
             <Link href="/platzordnung/" className="btn-secondary mt-6">

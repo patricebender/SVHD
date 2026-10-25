@@ -115,8 +115,8 @@ export default function HomePage() {
             <p className="mt-5 max-w-xl text-white/80">
               Auf unserem weitläufigen Vereinsgelände findest Du jede Menge Raum
               zum Trainieren, inklusive der Geräte für Agility, Hoopers und mehr.
-              Mitglieder haben jederzeit Zugriff und können den Platz unter
-              Beachtung der Platzordnung auch außerhalb der Trainingszeiten nutzen.
+              Als Mitglied kannst Du den Platz nach Absprache auch außerhalb der
+              Trainingszeiten zum Üben nutzen – unter Einhaltung der Platzordnung.
             </p>
             <div className="mt-8">
               <Link

@@ -14,10 +14,11 @@ const FILTERS: { id: Filter; label: string }[] = [
 ];
 
 function fmtDay(iso: string) {
-  return new Date(iso).toLocaleDateString("de-DE", { day: "2-digit" });
+  // Parse as local midnight so the day isn't shifted by the UTC offset.
+  return new Date(`${iso}T00:00:00`).toLocaleDateString("de-DE", { day: "2-digit" });
 }
 function fmtMonth(iso: string) {
-  return new Date(iso).toLocaleDateString("de-DE", { month: "short", year: "numeric" });
+  return new Date(`${iso}T00:00:00`).toLocaleDateString("de-DE", { month: "short", year: "numeric" });
 }
 
 /**
@@ -36,9 +37,13 @@ export function EventTimeline({ events }: { events: CalendarEvent[] }) {
   const [filter, setFilter] = useState<Filter>("all");
 
   useEffect(() => {
+    // Local date parts, not toISOString() — the latter converts to UTC and
+    // rolls back a day east of Greenwich, marking a past event as "als Nächstes".
     const now = new Date();
-    now.setHours(0, 0, 0, 0);
-    setToday(now.toISOString().slice(0, 10));
+    const y = now.getFullYear();
+    const m = String(now.getMonth() + 1).padStart(2, "0");
+    const d = String(now.getDate()).padStart(2, "0");
+    setToday(`${y}-${m}-${d}`);
   }, []);
 
   const sorted = [...events]

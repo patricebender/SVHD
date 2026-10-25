@@ -90,6 +90,31 @@ export default async function DisciplinePage({
         </div>
       </section>
 
+      {/* Disclaimer */}
+      {d.disclaimer && (
+        <section className="container-page pt-10 lg:pt-12">
+          <div className="flex gap-3 rounded-2xl border border-amber-300 bg-amber-50 px-5 py-4 text-amber-900">
+            <svg className="mt-0.5 h-5 w-5 flex-none text-amber-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
+              <path fillRule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495ZM10 6a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 10 6Zm0 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clipRule="evenodd" />
+            </svg>
+            <div className="text-sm leading-relaxed">
+              <p>{d.disclaimer.text}</p>
+              {d.disclaimer.link && (
+                <Link
+                  href={d.disclaimer.link.href}
+                  className="mt-2 inline-flex items-center gap-1 font-semibold underline underline-offset-2 hover:text-amber-700"
+                >
+                  {d.disclaimer.link.label}
+                  <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
+                    <path fillRule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z" clipRule="evenodd" />
+                  </svg>
+                </Link>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Body */}
       <section className="container-page py-16 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr]">

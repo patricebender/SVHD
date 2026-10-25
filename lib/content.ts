@@ -9,6 +9,11 @@ export type Discipline = {
   /** Highlights shown as a bullet list on the subpage. */
   highlights: string[];
   trainer: { name: string; note?: string };
+  /** Optional notice shown prominently on the detail page (e.g. waitlist, full). */
+  disclaimer?: {
+    text: string;
+    link?: { href: string; label: string };
+  };
   /** Discipline image (real photos from our Vereinsgelände). */
   image: string;
   /** Intrinsic image size, used for accurate OpenGraph/Twitter previews. */
@@ -38,6 +43,10 @@ export const disciplines: Discipline[] = [
       "Vorbereitung auf Agility-Turniere",
     ],
     trainer: { name: "Katrin Rempp, Ivonne Schäfer" },
+    disclaimer: {
+      text: "Agility ist derzeit ausgebucht. Neue Plätze werden über eine Warteliste vergeben, Mitglieder haben dabei Vorrang. Nichtmitglieder sind aber herzlich willkommen, zum Beispiel bei Kathrin in der Unterordnung – frag einfach nach.",
+      link: { href: "/trainingsangebote/unterordnung/", label: "Zur Unterordnung" },
+    },
     image: "/training/agility.webp",
     imageWidth: 1600,
     imageHeight: 1155,
@@ -363,18 +372,18 @@ const baseEvents: CalendarEvent[] = [
   {
     date: "2026-07-18",
     time: "ganztags",
-    title: "Internationales Fest der Gemeinde Dossenheim, Teilnahme des Vereins",
+    title: "Internationales Fest der Gemeinde Dossenheim",
     location: "Dossenheim, Rathausplatz",
-    note: "18. und 19. Juli, Details folgen",
+    note: "18. und 19. Juli, Teilnahme des Vereins, Details folgen",
   },
   { date: "2026-10-24", time: "10:00 Uhr", title: "Arbeitseinsatz", location: "Vereinsgelände" },
   { date: "2026-10-24", time: "ab 18:00 Uhr", title: "Vereinsparty", location: "Vereinsgelände" },
   {
     date: "2026-12-05",
     time: "ganztags",
-    title: "Dossenheimer Weihnachtstrubel, Teilnahme des Vereins",
+    title: "Dossenheimer Weihnachtstrubel",
     location: "Dossenheim, Rathausplatz",
-    note: "5. und 6. Dezember",
+    note: "5. und 6. Dezember, Teilnahme des Vereins",
   },
   { date: "2026-12-12", time: "16:00 Uhr", title: "Jahresabschluss bei Glühwein und Imbiss", location: "Vereinsgelände" },
 ];
