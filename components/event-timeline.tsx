@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { CalendarEvent } from "@/lib/content";
+import { CopyLinkButton } from "@/components/copy-link-button";
 
 export type { CalendarEvent };
 
@@ -35,6 +36,9 @@ export function EventTimeline({ events }: { events: CalendarEvent[] }) {
   const nextRef = useRef<HTMLLIElement>(null);
   const [today, setToday] = useState<string | null>(null);
   const [filter, setFilter] = useState<Filter>("all");
+  // Id of an event deep-linked via #hash: it is scrolled into view (instead of
+  // the default "next event") and briefly highlighted. null = no deep link.
+  const [targetId, setTargetId] = useState<string | null>(null);
 
   useEffect(() => {
     // Local date parts, not toISOString() — the latter converts to UTC and
@@ -51,6 +55,21 @@ export function EventTimeline({ events }: { events: CalendarEvent[] }) {
     // statically exported page.
     const q = new URLSearchParams(window.location.search).get("filter");
     if (q === "events" || q === "walks") setFilter(q);
+
+    // Deep link to a single event via #<id>. Decode because a shared URL may
+    // percent-encode the hash. Validated against actual ids below in the
+    // scroll effect; an unknown hash simply falls back to the next event.
+    const readHash = () => {
+      const hash = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+      if (hash) setTargetId(hash);
+    };
+    readHash();
+
+    // Also react when only the hash changes while we stay mounted — e.g. the
+    // banner (present on every page) is clicked from the Terminkalender itself,
+    // where Next keeps this component mounted and just updates the URL.
+    window.addEventListener("hashchange", readHash);
+    return () => window.removeEventListener("hashchange", readHash);
   }, []);
 
   const sorted = [...events]
@@ -68,14 +87,50 @@ export function EventTimeline({ events }: { events: CalendarEvent[] }) {
     ? sorted.findIndex((e) => e.date >= today)
     : -1;
 
+  // A deep link (#id) pointing at a real event wins over the default scroll.
+  const hasTarget = targetId !== null && sorted.some((e) => e.id === targetId);
+
+  // When a valid deep link exists, make sure its event is shown: switch to the
+  // "all" list if an inferred ?filter= would otherwise hide it (e.g. a Social
+  // Walk link opened without ?filter=walks).
+  useEffect(() => {
+    if (!targetId) return;
+    const target = events.find((e) => e.id === targetId);
+    if (!target) return;
+    const visible =
+      filter === "all" ||
+      (filter === "walks" ? target.kind === "walk" : target.kind !== "walk");
+    if (!visible) setFilter("all");
+  }, [targetId, filter, events]);
+
   useEffect(() => {
     if (!today) return;
     const container = scrollRef.current;
+    if (!container) return;
+
+    // Deep link: scroll to and highlight the linked event instead of "next".
+    if (hasTarget && targetId) {
+      const el = container.querySelector<HTMLLIElement>(
+        `[data-event-id="${CSS.escape(targetId)}"]`,
+      );
+      if (el) {
+        // Two scrolls are needed: the inner list must bring the card to its
+        // top (with a small gap so the ring clears the top fade, h-8), and the
+        // page must bring the container itself below the sticky header so the
+        // card isn't hidden behind the nav.
+        container.scrollTop = el.offsetTop - container.offsetTop - 24;
+        const headerOffset = 96; // sticky header (h-20) + breathing room
+        const top = container.getBoundingClientRect().top + window.scrollY - headerOffset;
+        window.scrollTo({ top, behavior: "smooth" });
+        return;
+      }
+    }
+
+    // Default: scroll the next upcoming event to the top of the container.
     const target = nextRef.current;
-    if (!container || !target) return;
-    // Scroll the next event to the top of the container (not the page).
+    if (!target) return;
     container.scrollTop = target.offsetTop - container.offsetTop;
-  }, [today, filter]);
+  }, [today, filter, hasTarget, targetId]);
 
   return (
     <div>
@@ -109,9 +164,12 @@ export function EventTimeline({ events }: { events: CalendarEvent[] }) {
         {sorted.map((e, i) => {
           const isPast = today !== null && e.date < today;
           const isNext = i === nextIndex;
+          const isTarget = hasTarget && e.id === targetId;
           return (
             <li
-              key={`${e.date}-${e.title}`}
+              key={e.id}
+              id={e.id}
+              data-event-id={e.id}
               ref={isNext ? nextRef : undefined}
               className="relative scroll-mt-2"
             >
@@ -123,7 +181,7 @@ export function EventTimeline({ events }: { events: CalendarEvent[] }) {
               <div
                 className={`card flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between ${
                   isPast ? "opacity-55" : ""
-                } ${isNext ? "ring-2 ring-brand/40" : ""}`}
+                } ${isTarget ? "ring-2 ring-brand" : isNext ? "ring-2 ring-brand/40" : ""}`}
               >
                 <div className="flex-1">
                   <div className="flex flex-wrap items-center gap-2">
@@ -138,6 +196,7 @@ export function EventTimeline({ events }: { events: CalendarEvent[] }) {
                         als Nächstes
                       </span>
                     )}
+                    <CopyLinkButton hash={e.id} label="diesem Termin" className="ml-auto" />
                   </div>
                   <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm text-foreground/70">
                     {e.time && <span>{e.time}</span>}

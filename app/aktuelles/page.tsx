@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { PageHero } from "@/components/page-hero";
+import { CopyLinkButton } from "@/components/copy-link-button";
 import { news } from "@/lib/content";
 
 type NewsImages = NonNullable<(typeof news)[number]["images"]>;
@@ -118,8 +119,8 @@ export default function AktuellesPage() {
               aria-hidden
               className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-brand/30 blur-3xl"
             />
-            <div className="relative mx-auto max-w-2xl text-center">
-              <div className="flex flex-wrap items-center justify-center gap-3">
+            <div className="relative mx-auto max-w-2xl">
+              <div className="flex flex-wrap items-center gap-3">
                 <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white">
                   Neu
                 </span>
@@ -129,6 +130,11 @@ export default function AktuellesPage() {
                 <time dateTime={lead.date} className="text-sm text-white/60">
                   {fmtDate(lead.date)}
                 </time>
+                <CopyLinkButton
+                  hash={lead.slug}
+                  label="dieser Neuigkeit"
+                  className="ml-auto !text-white/70 hover:!bg-white/10 hover:!text-white"
+                />
               </div>
               <h2 className="mt-4 text-3xl text-white lg:text-4xl">{lead.title}</h2>
               <div className="prose-club mt-5 text-white/80 [&_p]:text-white/80">
@@ -181,6 +187,7 @@ export default function AktuellesPage() {
                     >
                       {fmtDate(n.date)}
                     </time>
+                    <CopyLinkButton hash={n.slug} label="dieser Neuigkeit" className="ml-auto" />
                   </div>
                   <h3 className="mt-3 text-xl text-brand-dark">{n.title}</h3>
                   <div className="prose-club mt-3">

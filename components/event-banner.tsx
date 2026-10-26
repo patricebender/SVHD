@@ -44,9 +44,9 @@ function buildSlides(today: string | null): Slide[] {
     : null;
   if (nextEvent) {
     slides.push({
-      // Carry the filter so the calendar scrolls to the next Veranstaltung,
-      // not whatever event (possibly a Social Walk) happens to come first.
-      href: "/terminkalender/?filter=events",
+      // Deep-link to this exact event so the calendar scrolls to and highlights
+      // it; the filter keeps the Veranstaltungen list in view around it.
+      href: `/terminkalender/?filter=events#${nextEvent.id}`,
       lead: `Nächster Termin · ${fmtDate(nextEvent.date)}`,
       detail: nextEvent.time,
       title: nextEvent.title,
@@ -61,7 +61,7 @@ function buildSlides(today: string | null): Slide[] {
     : null;
   if (nextWalk) {
     slides.push({
-      href: "/terminkalender/?filter=walks",
+      href: `/terminkalender/?filter=walks#${nextWalk.id}`,
       lead: "Nächster Social Walk",
       title: fmtDate(nextWalk.date),
     });
@@ -69,7 +69,7 @@ function buildSlides(today: string | null): Slide[] {
 
   const latest = [...news].sort((a, b) => b.date.localeCompare(a.date))[0];
   if (latest) {
-    slides.push({ href: "/aktuelles/", lead: "Aktuelles", title: latest.title });
+    slides.push({ href: `/aktuelles/#${latest.slug}`, lead: "Aktuelles", title: latest.title });
   }
 
   return slides;

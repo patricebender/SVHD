@@ -395,6 +395,8 @@ export const news: {
 
 /** Calendar events 2026. */
 export type CalendarEvent = {
+  /** Stable anchor id (date + title), used to deep-link to a single event. */
+  id: string;
   date: string;
   time?: string;
   title: string;
@@ -404,7 +406,26 @@ export type CalendarEvent = {
   kind?: "walk";
 };
 
-const baseEvents: CalendarEvent[] = [
+/**
+ * Derive a stable anchor id from an event's date and title, e.g.
+ * "2026-10-24-arbeitseinsatz". The date prefix keeps same-day events apart
+ * (the two 2026-10-24 entries differ by title). German umlauts are folded so
+ * the id stays URL-clean.
+ */
+function slugifyEvent(date: string, title: string): string {
+  const slug = title
+    .toLowerCase()
+    .replace(/ä/g, "ae")
+    .replace(/ö/g, "oe")
+    .replace(/ü/g, "ue")
+    .replace(/ß/g, "ss")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return `${date}-${slug}`;
+}
+
+/** Events without their derived id; the id is filled in when `events` is built. */
+const baseEvents: Omit<CalendarEvent, "id">[] = [
   { date: "2026-01-25", time: "16:00 Uhr", title: "Jahreshauptversammlung", location: "Vereinsgelände" },
   {
     date: "2026-03-01",
@@ -460,7 +481,7 @@ const socialWalkDates: string[] = [
 export const events: CalendarEvent[] = [
   ...baseEvents,
   ...socialWalkDates.map(
-    (date): CalendarEvent => ({
+    (date): Omit<CalendarEvent, "id"> => ({
       date,
       title: "Social Walk",
       location: "Startort wird per E-Mail bekannt gegeben",
@@ -468,4 +489,4 @@ export const events: CalendarEvent[] = [
       kind: "walk",
     }),
   ),
-];
+].map((e) => ({ ...e, id: slugifyEvent(e.date, e.title) }));
