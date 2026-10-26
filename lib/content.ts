@@ -265,7 +265,7 @@ export const trainingSchedule: { day: string; slots: ScheduleSlot[] }[] = [
   {
     day: "Donnerstag",
     slots: [
-      { time: "18:00 – 20:00 Uhr", what: "Training für Begleithundeprüfung", trainerIds: ["nadja-trumpf"], slug: "begleithundepruefung" },
+      { time: "17:00 – 19:30 Uhr", what: "Training für Begleithundeprüfung", trainerIds: ["nadja-trumpf"], slug: "begleithundepruefung" },
     ],
   },
   {
@@ -487,6 +487,7 @@ const baseEvents: Omit<CalendarEvent, "id">[] = [
     note: "5. und 6. Dezember, Teilnahme des Vereins",
   },
   { date: "2026-12-12", time: "16:00 Uhr", title: "Jahresabschluss bei Glühwein und Imbiss", location: "Vereinsgelände" },
+  { date: "2027-01-24", time: "16:00 Uhr", title: "Jahreshauptversammlung", location: "Vereinsheim" },
 ];
 
 /**
