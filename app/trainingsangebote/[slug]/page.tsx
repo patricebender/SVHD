@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { disciplines, getDiscipline, getScheduleForDiscipline } from "@/lib/content";
+import { getPeople, peopleNames } from "@/lib/people";
+import { contact } from "@/lib/site";
 import { CourseJsonLd } from "@/components/json-ld";
 
 export function generateStaticParams() {
@@ -119,10 +121,13 @@ export default async function DisciplinePage({
       <section className="container-page py-16 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr]">
           <div>
-            <div className="grid gap-8 md:grid-cols-2 md:items-start">
-              <div className="prose-club">
-                <h2 className="mb-4 text-2xl">Das erwartet Euch</h2>
-                <ul>
+            {/* Highlights float right so the body text flows alongside and then
+                wraps full-width beneath it, framing the box instead of leaving a
+                tall empty column. Floats collapse to a stacked block on mobile. */}
+            <div className="prose-club">
+              <div className="mb-6 rounded-2xl border border-border bg-muted/40 p-6 md:float-right md:mb-4 md:ml-8 md:w-72 md:p-6">
+                <h2 className="mb-4 mt-0 text-2xl">Das erwartet Euch</h2>
+                <ul className="my-0">
                   {d.highlights.map((h) => (
                     <li key={h}>
                       <svg className="mt-1 h-4 w-4 flex-none text-brand" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
@@ -133,15 +138,14 @@ export default async function DisciplinePage({
                   ))}
                 </ul>
               </div>
-
-              <div className="prose-club">
-                {d.body.map((p, i) => (
-                  <p key={i}>{p}</p>
-                ))}
-              </div>
+              {d.body.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
             </div>
 
-            <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-2xl shadow-soft">
+            {/* Image sits directly below the text in the left column; clear-both
+                drops it past the floated highlights box. */}
+            <div className="relative mt-8 clear-both aspect-[16/9] overflow-hidden rounded-2xl shadow-soft">
               <Image
                 src={d.image}
                 alt={`${d.title} Training auf dem Vereinsgelände in Heidelberg`}
@@ -172,7 +176,7 @@ export default async function DisciplinePage({
                         {slot.time}
                       </p>
                       <p className="mt-0.5 text-xs text-foreground/70">
-                        {slot.what} · {slot.trainer}
+                        {slot.what} · {peopleNames(slot.trainerIds)}
                       </p>
                     </li>
                   ))}
@@ -189,9 +193,40 @@ export default async function DisciplinePage({
             )}
             <div className="card">
               <h3 className="text-base text-brand-dark">Ansprechpartner</h3>
-              <p className="mt-2 text-sm font-semibold text-foreground">{d.trainer.name}</p>
+              <ul className="mt-3 space-y-3 text-sm">
+                {getPeople(d.trainer.coachIds).map((c, i) => {
+                  const email = c.email ?? (c.phone ? undefined : contact.email);
+                  return (
+                    <li key={i}>
+                      <p className="font-semibold text-foreground">{c.name}</p>
+                      {(c.phone || email) && (
+                        <div className="mt-0.5 flex flex-col gap-0.5">
+                          {c.phone && (
+                            <a
+                              href={`tel:${c.phone.replace(/[^+\d]/g, "")}`}
+                              className="font-medium text-brand hover:underline"
+                            >
+                              {c.phone}
+                            </a>
+                          )}
+                          {email && (
+                            <a
+                              href={`mailto:${email}`}
+                              className="break-all font-medium text-brand hover:underline"
+                            >
+                              {email}
+                            </a>
+                          )}
+                        </div>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
               {d.trainer.note && (
-                <p className="mt-2 text-sm text-foreground/70">{d.trainer.note}</p>
+                <p className="mt-4 border-t border-border pt-4 text-sm text-foreground/70">
+                  {d.trainer.note}
+                </p>
               )}
             </div>
             <div className="card bg-muted">

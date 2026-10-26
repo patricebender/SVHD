@@ -196,7 +196,7 @@ export function EventTimeline({ events }: { events: CalendarEvent[] }) {
                         als Nächstes
                       </span>
                     )}
-                    <CopyLinkButton hash={e.id} label="diesem Termin" className="ml-auto" />
+                    <CopyLinkButton hash={e.id} label="diesem Termin" />
                   </div>
                   <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm text-foreground/70">
                     {e.time && <span>{e.time}</span>}

@@ -102,16 +102,16 @@ export default function KontaktPage() {
             </p>
           </div>
 
-          <div>
+          <div className="flex flex-col">
             <h2 className="text-2xl">Anfahrt</h2>
             <p className="mt-4 text-sm text-foreground/70">
               Unser Vereinsgelände liegt in der Straße Im Fennenberger 2, 69121
               Heidelberg.
             </p>
-            <div className="mt-6 aspect-[4/3] overflow-hidden rounded-2xl border border-border">
+            <div className="mt-6 min-h-80 flex-1 overflow-hidden rounded-2xl border border-border">
               <iframe
                 title="Karte Im Fennenberger 2, Heidelberg"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=8.65%2C49.42%2C8.72%2C49.47&layer=mapnik"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=8.6447%2C49.4330%2C8.6547%2C49.4396&layer=mapnik&marker=49.436278%2C8.649694"
                 className="h-full w-full"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -121,7 +121,7 @@ export default function KontaktPage() {
               href="https://www.openstreetmap.org/search?query=Im%20Fennenberger%202%2C%2069121%20Heidelberg"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-block text-sm font-medium text-brand hover:underline"
+              className="mt-3 self-start text-sm font-medium text-brand hover:underline"
             >
               Größere Karte öffnen
             </a>

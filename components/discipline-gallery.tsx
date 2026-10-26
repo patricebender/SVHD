@@ -9,32 +9,42 @@ type DisciplineGalleryProps = {
   cta?: string;
 };
 
-// Explicit gallery order (independent of the nav/sitemap order in lib/content):
-// three featured disciplines on top, the rest below. On lg the tiles sit on a
-// 12-column grid so each row fills edge-to-edge (3×4 on top, 4×3 below).
-const topSlugs = ["begleithundepruefung", "agility", "welpentraining"];
+// Gallery order (independent of the nav/sitemap order in lib/content): a
+// didactic progression — from first steps (Welpen, Unterordnung, BH) through
+// the hobby offering to the sports. Any discipline not listed is appended.
+// With eight disciplines this fills two even rows of four on lg.
+const order = [
+  "welpentraining",
+  "unterordnung",
+  "begleithundepruefung",
+  "wochenstart",
+  "agility",
+  "rally-obedience",
+  "hoopers",
+  "longieren",
+];
 const bySlug = new Map(disciplines.map((d) => [d.slug, d]));
-const topRow = topSlugs.map((slug) => bySlug.get(slug)!);
-const bottomRow = disciplines.filter((d) => !topSlugs.includes(d.slug));
-const ordered = [...topRow, ...bottomRow];
-const topCount = topRow.length;
+const ordered = [
+  ...order.map((slug) => bySlug.get(slug)).filter((d): d is NonNullable<typeof d> => Boolean(d)),
+  ...disciplines.filter((d) => !order.includes(d.slug)),
+];
 
 /**
  * Gallery of all disciplines, shared between the home page and the trainings
- * page. Uniform tile heights (fixed image crop); a 12-column grid puts three
- * featured disciplines on top and the remaining four on the second row.
+ * page. Uniform tile heights (fixed image crop); on lg the tiles sit four per
+ * row (two even rows for the eight disciplines).
  */
 export function DisciplineGallery({
   showTagline = false,
   cta = "Mehr erfahren",
 }: DisciplineGalleryProps) {
   return (
-    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-12">
-      {ordered.map((d, i) => (
+    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {ordered.map((d) => (
         <Link
           key={d.slug}
           href={`/trainingsangebote/${d.slug}/`}
-          className={`group card flex flex-col ${i < topCount ? "lg:col-span-4" : "lg:col-span-3"}`}
+          className="group card flex flex-col"
         >
           <div className="relative mb-4 aspect-[16/10] overflow-hidden rounded-xl">
             <Image

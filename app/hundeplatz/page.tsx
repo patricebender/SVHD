@@ -153,7 +153,7 @@ export default function HundeplatzPage() {
           <div className="mt-8 aspect-[21/9] overflow-hidden rounded-2xl border border-border">
             <iframe
               title="Karte Im Fennenberger 2, Heidelberg"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=8.65%2C49.42%2C8.72%2C49.47&layer=mapnik"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=8.6397%2C49.4330%2C8.6597%2C49.4396&layer=mapnik&marker=49.436278%2C8.649694"
               className="h-full w-full"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

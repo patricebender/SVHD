@@ -1,3 +1,5 @@
+import type { PersonId } from "@/lib/people";
+
 export type Discipline = {
   slug: string;
   title: string;
@@ -8,7 +10,12 @@ export type Discipline = {
   body: string[];
   /** Highlights shown as a bullet list on the subpage. */
   highlights: string[];
-  trainer: { name: string; note?: string };
+  trainer: {
+    /** Coach(es) for this discipline, referenced by id into the people registry. */
+    coachIds: PersonId[];
+    /** Optional free-text note shown below the coaches (not contact details). */
+    note?: string;
+  };
   /** Optional notice shown prominently on the detail page (e.g. waitlist, full). */
   disclaimer?: {
     text: string;
@@ -42,7 +49,7 @@ export const disciplines: Discipline[] = [
       "Sequenz- und Parcourstraining für Fortgeschrittene",
       "Vorbereitung auf Agility-Turniere",
     ],
-    trainer: { name: "Katrin Rempp, Ivonne Schäfer" },
+    trainer: { coachIds: ["katrin-rempp", "ivonne-schaefer"] },
     disclaimer: {
       text: "Agility ist derzeit ausgebucht. Neue Plätze werden über eine Warteliste vergeben, Mitglieder haben dabei Vorrang. Nichtmitglieder sind aber herzlich willkommen, zum Beispiel bei Kathrin in der Unterordnung – frag einfach nach.",
       link: { href: "/trainingsangebote/unterordnung/", label: "Zur Unterordnung" },
@@ -67,7 +74,7 @@ export const disciplines: Discipline[] = [
       "Leinenführigkeit und zuverlässiger Rückruf",
       "Basis für Begleithundeprüfung und IGP",
     ],
-    trainer: { name: "Kathrin Fischer" },
+    trainer: { coachIds: ["kathrin-fischer"] },
     image: "/training/unterordnung.webp",
     imageWidth: 1066,
     imageHeight: 1600,
@@ -90,7 +97,7 @@ export const disciplines: Discipline[] = [
       "Gelenkschonend, für jedes Alter",
       "Guter Einstieg in den Hundesport",
     ],
-    trainer: { name: "Gaby Möll" },
+    trainer: { coachIds: ["gaby-moell"] },
     image: "/training/rally-obedience.webp",
     imageWidth: 720,
     imageHeight: 1280,
@@ -113,7 +120,7 @@ export const disciplines: Discipline[] = [
       "Distanzführung und Körpersprache",
       "Für Hunde jeden Alters und jeder Größe",
     ],
-    trainer: { name: "Gaby Möll, Beate Horneck" },
+    trainer: { coachIds: ["gaby-moell", "beate-horneck"] },
     image: "/training/hoopers.webp",
     imageWidth: 1600,
     imageHeight: 1200,
@@ -134,7 +141,7 @@ export const disciplines: Discipline[] = [
       "Ruhige, gelenkschonende Sportart",
       "Sonntags um 10 Uhr",
     ],
-    trainer: { name: "Sabine Palm" },
+    trainer: { coachIds: ["sabine-palm"] },
     image: "/training/longieren.webp",
     imageWidth: 1600,
     imageHeight: 1200,
@@ -155,7 +162,7 @@ export const disciplines: Discipline[] = [
       "Sozialisierung und Gewöhnung an Umweltreize",
       "Erste Signale und Impulskontrolle",
     ],
-    trainer: { name: "Kathrin Fischer & Minttu Vainio" },
+    trainer: { coachIds: ["kathrin-fischer", "minttu-vainio"] },
     image: "/training/welpentraining.webp",
     imageWidth: 1200,
     imageHeight: 1600,
@@ -163,6 +170,34 @@ export const disciplines: Discipline[] = [
     // daher der Detail-Wert stärker nach oben gezogen als in den Karten.
     imagePosition: "center 38%",
     imagePositionDetail: "center 22%",
+  },
+  {
+    slug: "wochenstart",
+    title: "Gemeinsam in die Woche starten",
+    tagline: "Neues Angebot für Hobby- und Familienhunde",
+    summary:
+      "Montagmorgens mit Elke und Susanne: eine bunte Mischung aus Clicker, Beweglichkeit, Denksport und Nasenarbeit, offen für alle.",
+    body: [
+      "Mit Elke und Susanne startet Ihr ab sofort immer Montagmorgen um 10 Uhr in die neue Woche. Sie laden Euch und Eure Hunde zu Übungen, Anregungen und Ideen ein, die Ihr auch unterwegs und zuhause nutzen könnt, um gemeinsam Spaß zu haben und die Hunde auszulasten.",
+      "Das Angebot ist offen für alle interessierten Hunde und HalterInnen. Die Inhalte variieren von Woche zu Woche, eine kontinuierliche Teilnahme ist also nicht nötig. Wer mag, kann auch gerne spontan dazukommen.",
+    ],
+    highlights: [
+      "Für Hobby- und Familienhunde, jede Rasse willkommen",
+      "Clickerarbeit, Beweglichkeit und Denksport",
+      "Nasenarbeit, kleine Tricks und Konzentration",
+      "Flexibel: Teilnahme auch spontan möglich",
+    ],
+    trainer: {
+      note: "Interessierte können sich gerne bei Susanne melden, sie beantwortet gerne Eure Fragen.",
+      coachIds: ["elke", "susanne-weber"],
+    },
+    image: "/training/wochenstart.webp",
+    imageWidth: 1200,
+    imageHeight: 1662,
+    // Portrait source (3:4); the dog's head sits in the upper third, so pull
+    // the crop up in the wide card/hero bands.
+    imagePosition: "center 22%",
+    imagePositionDetail: "center 18%",
   },
   {
     slug: "begleithundepruefung",
@@ -180,7 +215,7 @@ export const disciplines: Discipline[] = [
       "Vorbereitung auf den VDH-Hundeführerschein",
       "Prüfungsabnahme im Verein möglich",
     ],
-    trainer: { name: "Nadja Trumpf" },
+    trainer: { coachIds: ["nadja-trumpf"] },
     image: "/training/begleithundepruefung.webp",
     imageWidth: 1600,
     imageHeight: 1111,
@@ -195,7 +230,8 @@ export function getDiscipline(slug: string) {
 export type ScheduleSlot = {
   time: string;
   what: string;
-  trainer: string;
+  /** Trainer(s) for this slot, referenced by id into the people registry. */
+  trainerIds: PersonId[];
   /** Discipline slug this slot belongs to, if it has a detail page. */
   slug?: Discipline["slug"];
 };
@@ -203,51 +239,52 @@ export const trainingSchedule: { day: string; slots: ScheduleSlot[] }[] = [
   {
     day: "Montag",
     slots: [
-      { time: "17:30 – 18:30 Uhr", what: "Rally Obedience", trainer: "Gaby Möll", slug: "rally-obedience" },
-      { time: "17:30 – 18:30 Uhr", what: "Agility Anfänger", trainer: "Katrin Rempp", slug: "agility" },
-      { time: "18:30 – 19:30 Uhr", what: "Agility Fun & Fortgeschrittene", trainer: "Katrin Rempp", slug: "agility" },
+      { time: "10:00 Uhr", what: "Gemeinsam in die Woche starten", trainerIds: ["elke", "susanne-weber"], slug: "wochenstart" },
+      { time: "17:30 – 18:30 Uhr", what: "Rally Obedience", trainerIds: ["gaby-moell"], slug: "rally-obedience" },
+      { time: "17:30 – 18:30 Uhr", what: "Agility Anfänger", trainerIds: ["katrin-rempp"], slug: "agility" },
+      { time: "18:30 – 19:30 Uhr", what: "Agility Fun & Fortgeschrittene", trainerIds: ["katrin-rempp"], slug: "agility" },
     ],
   },
   {
     day: "Dienstag",
     slots: [
-      { time: "17:00 – 18:00 Uhr", what: "Hoopers Anfänger", trainer: "Gaby Möll", slug: "hoopers" },
-      { time: "17:45 – 18:30 Uhr", what: "Welpenstunde (8–16 Wochen)", trainer: "Kathrin Fischer & Minttu Vainio", slug: "welpentraining" },
-      { time: "18:30 – 19:15 Uhr", what: "Welpenstunde (17–24 Wochen)", trainer: "Kathrin Fischer & Minttu Vainio", slug: "welpentraining" },
+      { time: "17:00 – 18:00 Uhr", what: "Hoopers Anfänger", trainerIds: ["gaby-moell"], slug: "hoopers" },
+      { time: "18:00 – 18:45 Uhr", what: "Welpenstunde (8–16 Wochen)", trainerIds: ["kathrin-fischer", "minttu-vainio"], slug: "welpentraining" },
+      { time: "18:45 – 19:30 Uhr", what: "Welpenstunde (17–24 Wochen)", trainerIds: ["kathrin-fischer", "minttu-vainio"], slug: "welpentraining" },
     ],
   },
   {
     day: "Mittwoch",
     slots: [
-      { time: "17:00 – 20:00 Uhr", what: "Agility Anfänger & Fortgeschrittene", trainer: "Ivonne Schäfer", slug: "agility" },
-      { time: "17:45 – 18:30 Uhr", what: "Unterordnung Anfänger", trainer: "Kathrin Fischer", slug: "unterordnung" },
-      { time: "18:30 – 19:15 Uhr", what: "Unterordnung Anfänger", trainer: "Kathrin Fischer", slug: "unterordnung" },
-      { time: "19:15 – 20:00 Uhr", what: "Unterordnung Fortgeschrittene", trainer: "Kathrin Fischer", slug: "unterordnung" },
+      { time: "17:00 – 20:00 Uhr", what: "Agility Anfänger & Fortgeschrittene", trainerIds: ["ivonne-schaefer"], slug: "agility" },
+      { time: "18:00 – 18:45 Uhr", what: "Unterordnung Anfänger", trainerIds: ["kathrin-fischer"], slug: "unterordnung" },
+      { time: "18:45 – 19:30 Uhr", what: "Unterordnung Anfänger", trainerIds: ["kathrin-fischer"], slug: "unterordnung" },
+      { time: "19:30 – 20:15 Uhr", what: "Unterordnung Fortgeschrittene", trainerIds: ["kathrin-fischer"], slug: "unterordnung" },
     ],
   },
   {
     day: "Donnerstag",
     slots: [
-      { time: "18:00 – 20:00 Uhr", what: "Training für Begleithundeprüfung", trainer: "Nadja Trumpf", slug: "begleithundepruefung" },
+      { time: "18:00 – 20:00 Uhr", what: "Training für Begleithundeprüfung", trainerIds: ["nadja-trumpf"], slug: "begleithundepruefung" },
     ],
   },
   {
     day: "Freitag",
     slots: [
-      { time: "17:00 – 17:30 Uhr", what: "Hoopers Anfänger", trainer: "Beate Horneck", slug: "hoopers" },
-      { time: "17:30 – 18:00 Uhr", what: "Hoopers Fortgeschrittene", trainer: "Gaby Möll", slug: "hoopers" },
+      { time: "17:00 – 17:30 Uhr", what: "Hoopers Anfänger", trainerIds: ["beate-horneck"], slug: "hoopers" },
+      { time: "17:30 – 18:00 Uhr", what: "Hoopers Fortgeschrittene", trainerIds: ["gaby-moell"], slug: "hoopers" },
     ],
   },
   {
     day: "Samstag",
     slots: [
-      { time: "16:00 Uhr", what: "Gruppenarbeit", trainer: "Beate Horneck" },
+      { time: "16:00 Uhr", what: "Gruppenarbeit", trainerIds: ["beate-horneck"] },
     ],
   },
   {
     day: "Sonntag",
     slots: [
-      { time: "10:00 Uhr", what: "Longieren", trainer: "Sabine Palm", slug: "longieren" },
+      { time: "10:00 Uhr", what: "Longieren", trainerIds: ["sabine-palm"], slug: "longieren" },
     ],
   },
 ];
@@ -260,12 +297,6 @@ export function getScheduleForDiscipline(slug: Discipline["slug"]) {
       .map((slot) => ({ day: day.day, ...slot })),
   );
 }
-
-/** Notice shown on the training overview (capacity status). */
-export const trainingNotice = {
-  heading: "Hunde aller Rassen sind bei uns willkommen",
-  text: "Aktuell können wir im Bereich Unterordnung, Agility & Longieren keine weiteren Teams aufnehmen, alle Plätze sind vergeben. Falls Du dennoch Interesse hast, zögere nicht uns zu kontaktieren. Wir finden eine Lösung.",
-};
 
 /** Prerequisites for active participation. */
 export const trainingRequirements =

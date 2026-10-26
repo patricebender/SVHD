@@ -2,12 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
 import { DisciplineGallery } from "@/components/discipline-gallery";
-import {
-  trainingSchedule,
-  trainingNotice,
-  trainingRequirements,
-} from "@/lib/content";
-import { contact } from "@/lib/site";
+import { trainingSchedule, trainingRequirements } from "@/lib/content";
+import { peopleNames } from "@/lib/people";
 
 export const metadata: Metadata = {
   title: "Trainingsangebote & Trainingszeiten",
@@ -24,21 +20,6 @@ export default function TrainingsangebotePage() {
         title="Training für jedes Hund-Mensch-Team"
         subtitle="Ob Welpe oder erfahrener Sporthund, ob Mitglied oder nicht, ob Schäferhund oder andere Rasse: Bei uns findet jedes Team das passende Angebot."
       />
-
-      {/* Notice */}
-      <section className="container-page pt-12">
-        <div className="rounded-2xl border border-brand/20 bg-brand-light p-6">
-          <h2 className="text-lg text-brand-dark">{trainingNotice.heading}</h2>
-          <p className="mt-2 text-sm text-foreground/80">{trainingNotice.text}</p>
-          <p className="mt-3 text-sm text-foreground/80">
-            Anmeldung über die Homepage oder per SMS an Kathrin Fischer unter{" "}
-            <a href={contact.smsHref} className="font-semibold text-brand hover:underline">
-              {contact.sms}
-            </a>
-            .
-          </p>
-        </div>
-      </section>
 
       {/* Trainingszeiten */}
       <section id="trainingszeiten" className="container-page py-14 lg:py-16 scroll-mt-24">
@@ -83,7 +64,7 @@ export default function TrainingsangebotePage() {
                     </p>
                     <p className="mt-1 text-sm text-foreground/70">
                       <span className="text-foreground/70">Ansprechpartner/-in: </span>
-                      {slot.trainer}
+                      {peopleNames(slot.trainerIds)}
                     </p>
                   </li>
                 ))}
@@ -124,7 +105,7 @@ export default function TrainingsangebotePage() {
                           <span className="text-brand-dark">{slot.what}</span>
                         )}
                       </td>
-                      <td className="px-5 py-3 text-foreground/70">{slot.trainer}</td>
+                      <td className="px-5 py-3 text-foreground/70">{peopleNames(slot.trainerIds)}</td>
                     </tr>
                   ))}
                 </tbody>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
+import { getPerson, type PersonId } from "@/lib/people";
 
 export const metadata: Metadata = {
   title: "Der Vorstand",
@@ -8,15 +9,16 @@ export const metadata: Metadata = {
   alternates: { canonical: "/vorstand/" },
 };
 
-const board = [
-  { role: "Vorsitzende", name: "Kathrin Fischer" },
-  { role: "Stv. Vorsitzender", name: "Roland Horneck" },
-  { role: "Kassenwartin", name: "Minttu Vainio" },
-  { role: "Übungswartin", name: "Nadja Trumpf" },
-  { role: "Stv. Übungswartin", name: "Beate Horneck" },
-  { role: "Schriftwartin", name: "Diana Horneck" },
-  { role: "Sportbeauftragte", name: "Miriam Duarte" },
-  { role: "Website", name: "Patrice Bender" },
+const board: { role: string; personId: PersonId }[] = [
+  { role: "Vorsitzende", personId: "kathrin-fischer" },
+  { role: "Stv. Vorsitzender", personId: "roland-horneck" },
+  { role: "Kassenwartin", personId: "minttu-vainio" },
+  { role: "Übungswartin", personId: "nadja-trumpf" },
+  { role: "Stv. Übungswartin", personId: "beate-horneck" },
+  { role: "Schriftwartin", personId: "alexandra-knoll" },
+  { role: "Sportbeauftragte", personId: "ivonne-schaefer" },
+  { role: "Beisitzerin", personId: "izaskun-gutierrez" },
+  { role: "Website", personId: "patrice-bender" },
 ];
 
 export default function VorstandPage() {
@@ -36,7 +38,7 @@ export default function VorstandPage() {
               className="rounded-2xl border border-border bg-muted/40 p-5"
             >
               <dt className="eyebrow">{member.role}</dt>
-              <dd className="mt-1 text-lg font-semibold">{member.name}</dd>
+              <dd className="mt-1 text-lg font-semibold">{getPerson(member.personId).name}</dd>
             </div>
           ))}
         </dl>

@@ -120,21 +120,23 @@ export default function AktuellesPage() {
               className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-brand/30 blur-3xl"
             />
             <div className="relative mx-auto max-w-2xl">
-              <div className="flex flex-wrap items-center gap-3">
-                <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white">
-                  Neu
-                </span>
-                <span className="text-xs font-semibold uppercase tracking-wider text-brand-mid">
-                  {lead.category}
-                </span>
-                <time dateTime={lead.date} className="text-sm text-white/60">
+              <CopyLinkButton
+                hash={lead.slug}
+                label="dieser Neuigkeit"
+                className="absolute right-0 top-0 !text-white/70 hover:!bg-white/10 hover:!text-white"
+              />
+              <div className="inline-flex flex-col pr-16">
+                <div className="flex items-center gap-3">
+                  <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white">
+                    Neu
+                  </span>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-brand-mid">
+                    {lead.category}
+                  </span>
+                </div>
+                <time dateTime={lead.date} className="mt-2 text-center text-sm text-white/60">
                   {fmtDate(lead.date)}
                 </time>
-                <CopyLinkButton
-                  hash={lead.slug}
-                  label="dieser Neuigkeit"
-                  className="ml-auto !text-white/70 hover:!bg-white/10 hover:!text-white"
-                />
               </div>
               <h2 className="mt-4 text-3xl text-white lg:text-4xl">{lead.title}</h2>
               <div className="prose-club mt-5 text-white/80 [&_p]:text-white/80">
@@ -176,8 +178,13 @@ export default function AktuellesPage() {
             {rest.map((n) => (
               <li key={n.slug} id={n.slug} className="relative scroll-mt-24">
                 <span className="absolute -left-[31px] top-2 h-3 w-3 rounded-full border-2 border-white bg-brand sm:-left-[39px]" />
-                <article className="card">
-                  <div className="flex flex-wrap items-center gap-3">
+                <article className="card relative">
+                  <CopyLinkButton
+                    hash={n.slug}
+                    label="dieser Neuigkeit"
+                    className="absolute right-4 top-4"
+                  />
+                  <div className="flex flex-wrap items-center gap-3 pr-16">
                     <span className="rounded-full bg-brand-light px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand">
                       {n.category}
                     </span>
@@ -187,7 +194,6 @@ export default function AktuellesPage() {
                     >
                       {fmtDate(n.date)}
                     </time>
-                    <CopyLinkButton hash={n.slug} label="dieser Neuigkeit" className="ml-auto" />
                   </div>
                   <h3 className="mt-3 text-xl text-brand-dark">{n.title}</h3>
                   <div className="prose-club mt-3">
