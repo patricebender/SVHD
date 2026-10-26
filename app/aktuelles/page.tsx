@@ -1,7 +1,54 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { PageHero } from "@/components/page-hero";
 import { news } from "@/lib/content";
+
+type NewsImages = NonNullable<(typeof news)[number]["images"]>;
+
+/**
+ * Photo gallery for a news post: the first image is shown large (hero), the
+ * remaining ones as a thumbnail row below. Keeps a single grid so the lead and
+ * timeline variants share the same markup, only the rounding/frame differs.
+ */
+function NewsGallery({ images, framed }: { images: NewsImages; framed?: boolean }) {
+  const [hero, ...thumbs] = images;
+  const frame = framed ? "ring-1 ring-white/10" : "ring-1 ring-border";
+  return (
+    <figure className="mt-7">
+      <div className={`relative aspect-[16/9] overflow-hidden rounded-2xl ${frame}`}>
+        <Image
+          src={hero.src}
+          alt={hero.alt}
+          fill
+          sizes="(min-width: 1024px) 42rem, 100vw"
+          className="object-cover"
+          style={{ objectPosition: hero.position }}
+          priority
+        />
+      </div>
+      {thumbs.length > 0 && (
+        <div className="mt-3 grid grid-cols-2 gap-3">
+          {thumbs.map((img) => (
+            <div
+              key={img.src}
+              className={`relative aspect-[4/5] overflow-hidden rounded-xl ${frame}`}
+            >
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                sizes="(min-width: 1024px) 21rem, 50vw"
+                className="object-cover"
+                style={{ objectPosition: img.position }}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+    </figure>
+  );
+}
 
 export const metadata: Metadata = {
   title: "Aktuelles",
@@ -71,8 +118,8 @@ export default function AktuellesPage() {
               aria-hidden
               className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-brand/30 blur-3xl"
             />
-            <div className="relative max-w-2xl">
-              <div className="flex flex-wrap items-center gap-3">
+            <div className="relative mx-auto max-w-2xl text-center">
+              <div className="flex flex-wrap items-center justify-center gap-3">
                 <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white">
                   Neu
                 </span>
@@ -89,6 +136,9 @@ export default function AktuellesPage() {
                   <p key={i}>{p}</p>
                 ))}
               </div>
+              {lead.images && lead.images.length > 0 && (
+                <NewsGallery images={lead.images} framed />
+              )}
               {lead.links && lead.links.length > 0 && (
                 <div className="mt-7 flex flex-wrap gap-3">
                   {lead.links.map((l, i) => (
@@ -138,6 +188,9 @@ export default function AktuellesPage() {
                       <p key={i}>{p}</p>
                     ))}
                   </div>
+                  {n.images && n.images.length > 0 && (
+                    <NewsGallery images={n.images} />
+                  )}
                   {n.links && n.links.length > 0 && (
                     <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
                       {n.links.map((l) => (

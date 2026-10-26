@@ -281,9 +281,58 @@ export const news: {
   title: string;
   excerpt: string;
   body: string[];
+  /**
+   * Optional photos for the post. The first image is shown large (hero),
+   * the rest as a thumbnail row below. Dimensions keep the layout stable
+   * and the OpenGraph preview accurate.
+   */
+  images?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+    /** object-position for the crop (e.g. "center" or "75% center"). */
+    position?: string;
+  }[];
   /** Contextual links to related pages, shown under the article. */
   links?: { label: string; href: string }[];
 }[] = [
+  {
+    slug: "arbeitseinsatz-erfolg-oktober",
+    date: "2026-10-25",
+    category: "Rückblick",
+    title: "Danke! Arbeitseinsatz war ein voller Erfolg",
+    excerpt:
+      "Viele helfende Hände, jede Menge entsorgtes Laub und Müll: Der Arbeitseinsatz am 24. Oktober hat unser Gelände auf Vordermann gebracht. Danke an alle!",
+    body: [
+      "Was für ein Tag! Beim Arbeitseinsatz am Samstag, den 24. Oktober, haben viele helfende Hände mit angepackt, und das Ergebnis kann sich sehen lassen.",
+      "Gemeinsam haben wir jede Menge Laub zusammengekehrt, Müll entsorgt und das Vereinsgelände winterfit gemacht. Mit so viel Unterstützung ging die Arbeit leicht von der Hand.",
+      "Ein herzliches Dankeschön an alle, die dabei waren und mit angepackt haben. Ihr seid großartig! Im Anschluss haben wir den Tag bei der Vereinsparty gemütlich ausklingen lassen.",
+    ],
+    images: [
+      {
+        src: "/aktuelles/arbeitseinsatz-gruppe.webp",
+        alt: "Große Gruppe von Helferinnen und Helfern beim Arbeitseinsatz auf dem Vereinsgelände",
+        width: 1600,
+        height: 740,
+        // Source is wider than 16:9; pull the crop left so the leftmost
+        // person stays in frame.
+        position: "30% center",
+      },
+      {
+        src: "/aktuelles/arbeitseinsatz-werkzeug.webp",
+        alt: "Besen, Schaufeln und Rechen stehen nach dem Einsatz am Zaun bereit",
+        width: 800,
+        height: 1732,
+      },
+      {
+        src: "/aktuelles/arbeitseinsatz-transport.webp",
+        alt: "Zwei Helfer transportieren einen beladenen Wagen über das Gelände",
+        width: 900,
+        height: 1599,
+      },
+    ],
+  },
   {
     slug: "arbeitseinsatz-vereinsparty-oktober",
     date: "2026-10-22",
