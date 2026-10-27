@@ -195,12 +195,11 @@ export const disciplines: Discipline[] = [
       coachIds: ["elke", "susanne-weber"],
     },
     image: "/training/wochenstart.webp",
-    imageWidth: 1200,
-    imageHeight: 1662,
-    // Portrait source (3:4); the dog's head sits in the upper third, so pull
-    // the crop up in the wide card/hero bands.
-    imagePosition: "center 22%",
-    imagePositionDetail: "center 18%",
+    imageWidth: 1600,
+    imageHeight: 1248,
+    // Landscape source (~1.28:1); Team geht mittig durch den Hoop, Hund im
+    // unteren Drittel – Crop leicht nach unten ziehen, damit er in Bändern bleibt.
+    imagePosition: "center 60%",
   },
   {
     slug: "begleithundepruefung",
