@@ -78,6 +78,8 @@ export const disciplines: Discipline[] = [
       "Basis für Begleithundeprüfung und IGP",
     ],
     trainer: { coachIds: ["kathrin-fischer"] },
+    // Unterordnung läuft über Kathrin.
+    contactEmail: contact.anmeldung.email,
     image: "/training/unterordnung.webp",
     imageWidth: 1066,
     imageHeight: 1600,
@@ -190,10 +192,9 @@ export const disciplines: Discipline[] = [
       "Nasenarbeit, kleine Tricks und Konzentration",
       "Flexibel: Teilnahme auch spontan möglich",
     ],
-    trainer: {
-      note: "Interessierte können sich gerne bei Susanne melden, sie beantwortet gerne Eure Fragen.",
-      coachIds: ["elke", "susanne-weber"],
-    },
+    trainer: { coachIds: ["elke", "susanne-weber"] },
+    // Dieses Angebot läuft über Susanne, nicht über die Sportbeauftragte.
+    contactEmail: "weber-hd@freenet.de",
     image: "/training/wochenstart.webp",
     imageWidth: 1600,
     imageHeight: 1248,
