@@ -44,12 +44,10 @@ export default function HundeplatzPage() {
               <p>
                 Nach einer gewissen Zeit im Verein können Mitglieder den Platz{" "}
                 <strong>nach Absprache</strong> auch außerhalb der Trainingszeiten
-                zum Trainieren nutzen – unter Einhaltung der Platzordnung.
+                zum Trainieren nutzen – unter Einhaltung der{" "}
+                <Link href="/platzordnung/">Platzordnung</Link>.
               </p>
             </div>
-            <Link href="/platzordnung/" className="btn-secondary mt-6">
-              Zur Platzordnung
-            </Link>
           </div>
 
           <div className="relative aspect-[16/9] overflow-hidden rounded-3xl shadow-soft">
