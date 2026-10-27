@@ -23,6 +23,11 @@ export function OrganizationJsonLd() {
       addressRegion: "Baden-Württemberg",
       addressCountry: "DE",
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 49.430304,
+      longitude: 8.699409,
+    },
     email: contact.anmeldung.email,
     telephone: contact.phone,
     sameAs: [siteConfig.instagram],

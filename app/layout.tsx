@@ -40,11 +40,13 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: `${siteConfig.shortName} – Hundesport in Heidelberg`,
     description: siteConfig.description,
+    images: ["/logo-email.png"],
   },
   twitter: {
     card: "summary",
     title: `${siteConfig.shortName} – Hundesport in Heidelberg`,
     description: siteConfig.description,
+    images: ["/logo-email.png"],
   },
   robots: { index: true, follow: true },
   icons: {
