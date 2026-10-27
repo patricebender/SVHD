@@ -2,9 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { disciplines, getDiscipline, getScheduleForDiscipline } from "@/lib/content";
+import {
+  disciplines,
+  getDiscipline,
+  getDisciplineContactEmail,
+  getScheduleForDiscipline,
+} from "@/lib/content";
 import { getPeople, peopleNames } from "@/lib/people";
-import { contact } from "@/lib/site";
 import { CourseJsonLd } from "@/components/json-ld";
 
 export function generateStaticParams() {
@@ -59,6 +63,25 @@ export default async function DisciplinePage({
   if (!d) notFound();
 
   const slots = getScheduleForDiscipline(d.slug);
+
+  // Prefilled E-Mail für Schnupper-Anfragen: freundliche Anrede plus ein kurzes
+  // Formular, das Interessierte nur noch ausfüllen müssen.
+  const mailBody = [
+    `Hallo liebes Team,`,
+    ``,
+    `ich interessiere mich für ein Schnuppertraining im Bereich ${d.title} und würde gerne unverbindlich vorbeikommen.`,
+    ``,
+    `Hier meine Angaben:`,
+    `• Name des Hundehalters/der Hundehalterin: `,
+    `• Name des Hundes: `,
+    `• Rasse des Hundes: `,
+    `• Alter des Hundes: `,
+    ``,
+    `Viele Grüße`,
+  ].join("\n");
+  const mailtoHref = `mailto:${getDisciplineContactEmail(d)}?subject=${encodeURIComponent(
+    `Schnuppertraining ${d.title}`,
+  )}&body=${encodeURIComponent(mailBody)}`;
 
   return (
     <>
@@ -194,34 +217,11 @@ export default async function DisciplinePage({
             <div className="card">
               <h3 className="text-base text-brand-dark">Ansprechpartner</h3>
               <ul className="mt-3 space-y-3 text-sm">
-                {getPeople(d.trainer.coachIds).map((c, i) => {
-                  const email = c.email ?? (c.phone ? undefined : contact.email);
-                  return (
-                    <li key={i}>
-                      <p className="font-semibold text-foreground">{c.name}</p>
-                      {(c.phone || email) && (
-                        <div className="mt-0.5 flex flex-col gap-0.5">
-                          {c.phone && (
-                            <a
-                              href={`tel:${c.phone.replace(/[^+\d]/g, "")}`}
-                              className="font-medium text-brand hover:underline"
-                            >
-                              {c.phone}
-                            </a>
-                          )}
-                          {email && (
-                            <a
-                              href={`mailto:${email}`}
-                              className="break-all font-medium text-brand hover:underline"
-                            >
-                              {email}
-                            </a>
-                          )}
-                        </div>
-                      )}
-                    </li>
-                  );
-                })}
+                {getPeople(d.trainer.coachIds).map((c, i) => (
+                  <li key={i}>
+                    <p className="font-semibold text-foreground">{c.name}</p>
+                  </li>
+                ))}
               </ul>
               {d.trainer.note && (
                 <p className="mt-4 border-t border-border pt-4 text-sm text-foreground/70">
@@ -230,13 +230,23 @@ export default async function DisciplinePage({
               )}
             </div>
             <div className="card bg-muted">
-              <h3 className="text-base text-brand-dark">Schnuppern?</h3>
+              <h3 className="text-base text-brand-dark">Interesse geweckt?</h3>
               <p className="mt-2 text-sm text-foreground/70">
-                Nach vorheriger Anmeldung kannst Du unverbindlich an einem
-                Training teilnehmen, auch als Nichtmitglied und mit jeder Rasse.
+                Komm nach vorheriger Anmeldung unverbindlich zum Schnuppern
+                vorbei, auch als Nichtmitglied und mit jeder Rasse. Schreib uns
+                einfach, wir melden uns bei Dir.
               </p>
-              <Link href="/mitgliedschaft/" className="btn-primary mt-4 w-full">
-                Anmelden
+              <a href={mailtoHref} className="btn-primary mt-4 w-full">
+                <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
+                  <path d="M3 4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H3Zm.4 2h13.2L10 10.75 3.4 6ZM3 8.08l6.47 4.66a.9.9 0 0 0 1.06 0L17 8.08V14H3V8.08Z" />
+                </svg>
+                Unverbindlich anfragen
+              </a>
+              <Link
+                href="/mitgliedschaft/"
+                className="btn-secondary mt-3 w-full"
+              >
+                Mitglied werden
               </Link>
             </div>
           </aside>

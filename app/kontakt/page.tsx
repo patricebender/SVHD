@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
 import { contact, siteConfig } from "@/lib/site";
 
@@ -15,7 +16,7 @@ export default function KontaktPage() {
       <PageHero
         eyebrow="Kontakt"
         title="So erreichst Du uns"
-        subtitle="Fragen zum Training, zur Mitgliedschaft oder Anmeldung zum Schnuppertraining? Melde Dich gerne."
+        subtitle="Fragen zum Training, zur Mitgliedschaft oder zum Verein? Melde Dich gerne."
       />
 
       <section className="container-page py-16 lg:py-20">
@@ -43,11 +44,20 @@ export default function KontaktPage() {
               </dl>
             </div>
 
-            <h2 className="mt-10 text-2xl">Anmeldung & Schnuppertraining</h2>
+            <h2 className="mt-10 text-2xl">Fragen rund um den Verein</h2>
             <div className="mt-6 card">
               <p className="text-sm text-foreground/80">
-                Für die Anmeldung zum Training oder ein Schnuppertraining erreichst
-                Du uns am schnellsten per SMS oder E-Mail.
+                Du hast Fragen zum Verein, zur Mitgliedschaft oder zum Training?
+                Kathrin hilft Dir gerne weiter, am schnellsten per SMS oder
+                E-Mail. Für ein konkretes Schnuppertraining meldest Du Dich am
+                besten über das Kontaktformular des jeweiligen{" "}
+                <Link
+                  href="/trainingsangebote/"
+                  className="font-medium text-brand hover:underline"
+                >
+                  Angebots
+                </Link>
+                .
               </p>
               <dl className="mt-4 space-y-3 text-sm">
                 <div className="flex gap-3">
@@ -81,7 +91,7 @@ export default function KontaktPage() {
                 </div>
               </dl>
               <a
-                href={`mailto:${contact.anmeldung.email}?subject=Anfrage%20Schnuppertraining`}
+                href={`mailto:${contact.anmeldung.email}?subject=Anfrage%20an%20den%20Verein`}
                 className="btn-primary mt-6 w-full"
               >
                 E-Mail schreiben

@@ -20,6 +20,8 @@ export const contact = {
   phone: "06221 - 47 55 65",
   phoneHref: "tel:+4962214755 65".replace(/\s/g, ""),
   email: "info@schaeferhundeverein-heidelberg.de",
+  // Fallback training contact when a discipline has no own address
+  sportbeauftragte: "sportbeauftragte@schaeferhundeverein-heidelberg.de",
   // Anmeldung / Kontakt Kathrin Fischer
   sms: "+49 175 5245250",
   smsHref: "sms:+491755245250",

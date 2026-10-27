@@ -1,4 +1,5 @@
 import type { PersonId } from "@/lib/people";
+import { contact } from "@/lib/site";
 
 export type Discipline = {
   slug: string;
@@ -16,6 +17,8 @@ export type Discipline = {
     /** Optional free-text note shown below the coaches (not contact details). */
     note?: string;
   };
+  /** Contact email for this training; falls back to the Sportbeauftragte address. */
+  contactEmail?: string;
   /** Optional notice shown prominently on the detail page (e.g. waitlist, full). */
   disclaimer?: {
     text: string;
@@ -224,6 +227,11 @@ export const disciplines: Discipline[] = [
 
 export function getDiscipline(slug: string) {
   return disciplines.find((d) => d.slug === slug);
+}
+
+/** Contact email for a training, falling back to the Sportbeauftragte address. */
+export function getDisciplineContactEmail(d: Discipline): string {
+  return d.contactEmail ?? contact.sportbeauftragte;
 }
 
 /** Weekly training schedule, grouped by day. */
