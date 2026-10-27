@@ -69,7 +69,7 @@ export default async function DisciplinePage({
   const mailBody = [
     `Hallo liebes Team,`,
     ``,
-    `ich interessiere mich für ein Schnuppertraining im Bereich ${d.title} und würde gerne unverbindlich vorbeikommen.`,
+    `ich interessiere mich für ein Schnuppertraining für das Angebot "${d.title}" und würde gerne unverbindlich vorbeikommen.`,
     ``,
     `Hier meine Angaben:`,
     `• Name des Hundehalters/der Hundehalterin: `,
