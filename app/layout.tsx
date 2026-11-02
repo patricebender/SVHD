@@ -49,11 +49,6 @@ export const metadata: Metadata = {
     images: ["/logo-email.png"],
   },
   robots: { index: true, follow: true },
-  icons: {
-    icon: [{ url: "/logo.svg", type: "image/svg+xml" }],
-    shortcut: "/logo.svg",
-    apple: "/logo.svg",
-  },
 };
 
 export const viewport: Viewport = {
