@@ -163,8 +163,10 @@ export function EventTimeline({ events }: { events: CalendarEvent[] }) {
         <span className="pointer-events-none absolute inset-y-1 left-[3px] w-px bg-border" aria-hidden />
         {sorted.map((e, i) => {
           const isPast = today !== null && e.date < today;
-          const isNext = i === nextIndex;
           const isTarget = hasTarget && e.id === targetId;
+          // Only ever one element is highlighted: when a deep link is active the
+          // anchored event wins, so the "als Nächstes" marker steps aside.
+          const isNext = !hasTarget && i === nextIndex;
           return (
             <li
               key={e.id}
