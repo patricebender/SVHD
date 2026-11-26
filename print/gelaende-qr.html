@@ -42,7 +42,7 @@
     width: 210mm;
     height: 297mm;
     margin: 0 auto;
-    padding: 18mm 18mm 14mm;
+    padding: 18mm 18mm 22mm;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -70,7 +70,7 @@
   }
 
   .eyebrow {
-    margin: 5mm 0 0;
+    margin: 10mm 0 0;   /* breathing room below the top band (no logo above) */
     font-size: 11pt;
     font-weight: 700;
     letter-spacing: 0.22em;
@@ -148,8 +148,7 @@
 </head>
 <body>
   <section class="sheet">
-    <img class="logo" src="logo.svg" alt="Vereinslogo" />
-
+    <!-- No top logo here: the logo already sits in the centre of the QR below. -->
     <p class="eyebrow">Willkommen</p>
     <h1>SV Heidelberg und Dossenheim</h1>
     <p class="subtitle">
