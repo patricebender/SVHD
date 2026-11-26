@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gelände-Aushang · SV Heidelberg &amp; Dossenheim</title>
+<!--
+  DIN A4 sign for the Vereinsgelände (year-round, non-seasonal): the club's
+  brand-blue identity with a large QR to the homepage
+  (https://schaeferhundeverein-heidelberg.de/) and the standard logo centred
+  inside it. Error-correction level H tolerates the centre logo; verified
+  scannable with zbarimg.
+
+  Self-contained — logo.svg and qr-blue.svg live next to this file in print/.
+  Intended to be laminated / weatherproofed for outdoor display.
+
+  To make a PDF: open in a browser → Print (Cmd/Ctrl+P) → "Save as PDF",
+  paper A4, margins "None", enable "Background graphics".
+-->
+<style>
+  @page { size: A4; margin: 0; }
+
+  :root {
+    --brand:      #0067a3;   /* interactive blue */
+    --brand-dark: #00456b;   /* deep navy */
+    --brand-ink:  #10232e;
+    --ink:        #10232e;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: "League Spartan", "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+    color: var(--ink);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .sheet {
+    position: relative;
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto;
+    padding: 18mm 18mm 14mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  /* Brand bands top & bottom. */
+  .sheet::before,
+  .sheet::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 9mm;
+    background: linear-gradient(90deg, var(--brand-dark) 0%, var(--brand) 100%);
+  }
+  .sheet::before { top: 0; }
+  .sheet::after { bottom: 0; }
+
+  .logo {
+    width: 30mm;
+    height: auto;
+    margin-top: 2mm;
+  }
+
+  .eyebrow {
+    margin: 5mm 0 0;
+    font-size: 11pt;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+
+  h1 {
+    margin: 2.5mm 0 0;
+    font-size: 29pt;
+    line-height: 1.1;
+    font-weight: 800;
+    color: var(--brand-dark);
+  }
+
+  .subtitle {
+    margin: 4mm auto 0;
+    max-width: 150mm;
+    font-size: 14.5pt;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+
+  /* ---- QR centrepiece --------------------------------------------- */
+  .qr-wrap {
+    position: relative;
+    margin: auto;
+    width: 160mm;
+    height: 160mm;
+    padding: 3mm;
+    border-radius: 7mm;
+    background: #ffffff;
+    border: 2.5mm solid var(--brand);
+    box-shadow: 0 2mm 10mm rgba(0, 69, 107, 0.16);
+  }
+  .qr-wrap img.qr { display: block; width: 100%; height: 100%; image-rendering: pixelated; }
+
+  /* Centre badge holding the logo, punched out of the QR. */
+  .qr-badge {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40mm; height: 40mm;
+    background: #ffffff;
+    border-radius: 5mm;
+    box-shadow: 0 0 0 1.5mm #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .qr-badge img { width: 30mm; height: auto; }
+
+  .scan-hint {
+    margin: 5mm 0 0;
+    font-size: 16pt;
+    font-weight: 800;
+    color: var(--brand);
+  }
+
+  .url {
+    margin: 2mm 0 0;
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--brand-dark);
+  }
+
+  .footer {
+    margin-top: 6mm;
+    font-size: 10.5pt;
+    color: var(--ink);
+    opacity: 0.8;
+  }
+  .footer strong { color: var(--brand); }
+</style>
+</head>
+<body>
+  <section class="sheet">
+    <img class="logo" src="logo.svg" alt="Vereinslogo" />
+
+    <p class="eyebrow">Willkommen</p>
+    <h1>SV Heidelberg &amp; Dossenheim</h1>
+    <p class="subtitle">
+      Besucht uns online: Trainingsangebote, Termine und alles rund um unseren
+      Hundesportverein &ndash; einfach den Code scannen.
+    </p>
+
+    <div class="qr-wrap">
+      <img class="qr" src="qr-blue.svg" alt="QR-Code zur Website schaeferhundeverein-heidelberg.de" />
+      <div class="qr-badge">
+        <img src="logo.svg" alt="Vereinslogo" />
+      </div>
+    </div>
+
+    <p class="scan-hint">Scannen &amp; entdecken</p>
+    <p class="url">schaeferhundeverein-heidelberg.de</p>
+
+    <p class="footer">
+      <strong>Verein für Deutsche Schäferhunde</strong> &middot; OG Heidelberg &amp; Dossenheim e.V. &middot; gegr. 1922
+    </p>
+  </section>
+</body>
+</html>
