@@ -6,18 +6,29 @@ import { CopyLinkButton } from "@/components/copy-link-button";
 import { news } from "@/lib/content";
 
 type NewsImages = NonNullable<(typeof news)[number]["images"]>;
+type NewsImage = NewsImages[number];
+
+/** A portrait image is taller than it is wide. */
+const isPortrait = (img: NewsImage) => img.height > img.width;
 
 /**
  * Photo gallery for a news post: the first image is shown large (hero), the
  * remaining ones as a thumbnail row below. Keeps a single grid so the lead and
  * timeline variants share the same markup, only the rounding/frame differs.
+ *
+ * The hero keeps a 16:9 crop for landscape sources; a lone portrait photo is
+ * shown in its own (capped) aspect ratio instead, so it isn't sliced down to a
+ * letterbox. A side-by-side magazine layout is handled by the lead article.
  */
 function NewsGallery({ images, framed }: { images: NewsImages; framed?: boolean }) {
   const [hero, ...thumbs] = images;
   const frame = framed ? "ring-1 ring-white/10" : "ring-1 ring-border";
+  // A single portrait photo keeps its shape (capped height); otherwise 16:9.
+  const soloPortrait = thumbs.length === 0 && isPortrait(hero);
+  const heroAspect = soloPortrait ? "aspect-[3/4] max-h-[32rem] mx-auto" : "aspect-[16/9]";
   return (
     <figure className="mt-7">
-      <div className={`relative aspect-[16/9] overflow-hidden rounded-2xl ${frame}`}>
+      <div className={`relative overflow-hidden rounded-2xl ${heroAspect} ${frame}`}>
         <Image
           src={hero.src}
           alt={hero.alt}
@@ -66,6 +77,11 @@ function fmtDate(iso: string) {
   });
 }
 
+/** Links that leave the site open in a new tab and get rel=noopener. */
+const isExternal = (href: string) => /^https?:\/\//.test(href);
+const externalProps = (href: string) =>
+  isExternal(href) ? { target: "_blank", rel: "noopener noreferrer" } : {};
+
 const ArrowRight = () => (
   <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
     <path
@@ -98,6 +114,14 @@ const relatedPages = [
 export default function AktuellesPage() {
   const sorted = [...news].sort((a, b) => b.date.localeCompare(a.date));
   const [lead, ...rest] = sorted;
+
+  // A lead with exactly one portrait photo gets it floated into the text as a
+  // compact inset the paragraphs wrap around, instead of a full-width 16:9 strip
+  // that would slice the portrait down to a letterbox.
+  const leadFloatImage =
+    lead?.images?.length === 1 && isPortrait(lead.images[0])
+      ? lead.images[0]
+      : null;
 
   return (
     <>
@@ -140,11 +164,31 @@ export default function AktuellesPage() {
               </div>
               <h2 className="mt-4 text-3xl text-white lg:text-4xl">{lead.title}</h2>
               <div className="prose-club mt-5 text-white/80 [&_p]:text-white/80">
+                {/* A lone portrait photo floats into the text as a compact inset
+                    the paragraphs wrap around. It follows the headline in source
+                    order, so the headline always leads (incl. mobile), and keeps
+                    its natural 3:4 shape instead of a letterboxed 16:9 strip. */}
+                {leadFloatImage && (
+                  <figure className="float-right ml-5 mb-3 w-36 sm:ml-6 sm:w-48">
+                    <div className="relative aspect-[3/4] overflow-hidden rounded-xl ring-1 ring-white/10">
+                      <Image
+                        src={leadFloatImage.src}
+                        alt={leadFloatImage.alt}
+                        fill
+                        sizes="12rem"
+                        className="object-cover"
+                        style={{ objectPosition: leadFloatImage.position }}
+                        priority
+                      />
+                    </div>
+                  </figure>
+                )}
                 {lead.body.map((p, i) => (
                   <p key={i}>{p}</p>
                 ))}
               </div>
-              {lead.images && lead.images.length > 0 && (
+              {/* Stacked gallery only for landscape / multi-image leads. */}
+              {!leadFloatImage && lead.images && lead.images.length > 0 && (
                 <NewsGallery images={lead.images} framed />
               )}
               {lead.links && lead.links.length > 0 && (
@@ -153,6 +197,7 @@ export default function AktuellesPage() {
                     <Link
                       key={l.href}
                       href={l.href}
+                      {...externalProps(l.href)}
                       className={
                         i === 0
                           ? "inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-brand transition hover:bg-white/90"
@@ -210,6 +255,7 @@ export default function AktuellesPage() {
                         <Link
                           key={l.href}
                           href={l.href}
+                          {...externalProps(l.href)}
                           className="inline-flex items-center gap-1 text-sm font-semibold text-brand hover:underline"
                         >
                           {l.label}

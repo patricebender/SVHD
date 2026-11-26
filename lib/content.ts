@@ -337,6 +337,36 @@ export const news: {
   links?: { label: string; href: string }[];
 }[] = [
   {
+    slug: "dossenheimer-weihnachtstrubel-2026",
+    date: "2026-11-26",
+    category: "Veranstaltung",
+    title: "🎄 Hundefreunde auf dem Dossenheimer Weihnachtstrubel",
+    excerpt:
+      "Am 2. Advent sind wir wieder mit unserem Stand beim Dossenheimer Weihnachtstrubel: Winzerglühwein, Bratwurst, Schupfnudeln und selbstgebackene Hundekekse, deren Erlös zu 100% an den Futteranker Mannheim e.V. geht. 🐾",
+    body: [
+      "Der 1. Advent steht vor der Tür und der 2. Advent rückt näher, und mit ihm das Highlight der Vorweihnachtszeit in Dossenheim: der Dossenheimer Weihnachtstrubel. ✨ Auch in diesem Jahr ist der Verein für Deutsche Schäferhunde Heidelberg und Dossenheim e.V. wieder mit von der Partie, sind wir doch seit dem ersten Weihnachtstrubel ein fester Bestandteil.",
+      "Mit feinstem Winzerglühwein vom Weingut Clauer aus Heidelberg sowie alkoholfreiem Glühwein der Winzer Alexander und Jochen Bähr aus Neustadt a.d. Weinstraße kann man sich an unserem Stand auch an kalten Tagen aufwärmen. 🍷 Für das leibliche Wohl von Groß und Klein ist selbstverständlich bestens gesorgt: leckere Bratwürste von der Metzgerei Schäfer aus Dossenheim sowie Schupfnudeln mit selbstgemachtem Sauerkraut, welches uns der Obst- und Gartenbauverein Dossenheim dankenswerterweise erneut zur Verfügung stellt, oder für die Süßen unter Euch auch gerne mit Apfelmus.",
+      "Natürlich kommen auch die Fellnasen auf ihre Kosten: In diesem Jahr werden wir zum fünften Mal selbstgebackene Hundekekse anbieten, unsere Bäcker sind schon fleißig bei der Arbeit. 🦴 Mit dem Kauf einer Packung macht Ihr nicht nur den eigenen Hund, sondern gleich noch viele andere Tiere glücklich, denn der Erlös geht in diesem Jahr zu 100% erneut an den Verein „Futteranker Mannheim e.V.“.",
+      "Auch wieder im Verkauf und ideal als Weihnachtspräsent: die selbstgekochte Marmelade des Obst- und Gartenbauvereins Dossenheim in vielen verschiedenen und teils außergewöhnlichen Sorten, stammt doch das Obst hierfür aus dem vereinseigenen Garten. Und neu im Programm leckere Liköre, die Ihr gerne probieren und bei uns käuflich erwerben könnt. Ihr dürft wirklich gespannt sein. 🎁",
+      "Kommt vorbei, lasst es Euch gut gehen und tut etwas Gutes beim Stand des Schäferhundevereins Heidelberg und Dossenheim e.V. Wir freuen uns auf Euch! ❤️",
+    ],
+    images: [
+      {
+        src: "/aktuelles/weihnachtstrubel-hundekekse.webp",
+        alt: "Weihnachtlich dekorierter Schäferhund mit Nikolausmütze am Stand des Vereins",
+        width: 466,
+        height: 766,
+        // Shown in a 3:4 frame on the Aktuelles lead; a slight upward bias keeps
+        // the dog's face centered rather than cropping it at the top edge.
+        position: "center 35%",
+      },
+    ],
+    links: [
+      { label: "Zum Terminkalender", href: "/terminkalender/#2026-12-05-dossenheimer-weihnachtstrubel" },
+      { label: "Futteranker Mannheim e.V.", href: "https://futteranker.de/" },
+    ],
+  },
+  {
     slug: "arbeitseinsatz-erfolg-oktober",
     date: "2026-10-25",
     category: "Rückblick",
