@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { navItems } from "@/lib/nav";
-import { siteConfig, contact } from "@/lib/site";
+import { siteConfig, contact, christmasTheme } from "@/lib/site";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -12,7 +12,7 @@ export function SiteFooter() {
         <div className="sm:col-span-2 lg:col-span-1">
           <div className="flex items-center gap-3">
             <Image
-              src="/logo.svg"
+              src={christmasTheme ? "/logo-christmas.svg" : "/logo.svg"}
               alt=""
               width={40}
               height={50}

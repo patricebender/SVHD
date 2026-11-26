@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { navItems } from "@/lib/nav";
-import { siteConfig } from "@/lib/site";
+import { siteConfig, christmasTheme } from "@/lib/site";
 import { EventBanner } from "@/components/event-banner";
 
 export function SiteHeader() {
@@ -26,7 +26,7 @@ export function SiteHeader() {
           onClick={() => setOpen(false)}
         >
           <Image
-            src="/logo.svg"
+            src={christmasTheme ? "/logo-christmas.svg" : "/logo.svg"}
             alt={`${siteConfig.shortName} Logo`}
             width={44}
             height={54}

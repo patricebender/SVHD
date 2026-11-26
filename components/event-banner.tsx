@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { events, news } from "@/lib/content";
+import { christmasTheme } from "@/lib/site";
 
 const ROTATE_MS = 6000;
 const ROLL_MS = 500;
@@ -176,7 +177,7 @@ export function EventBanner() {
 
   return (
     <div
-      className="overflow-hidden bg-brand transition-[max-height,opacity] duration-500 ease-out"
+      className="promo-bar overflow-hidden bg-brand transition-[max-height,opacity] duration-500 ease-out"
       style={{ maxHeight: collapsed ? 0 : "1.75rem", opacity: collapsed ? 0 : 1 }}
       aria-hidden={collapsed}
     >
@@ -206,10 +207,15 @@ function Slide({ slide }: { slide: Slide }) {
       href={slide.href}
       className="flex h-7 items-center justify-center gap-2 truncate text-center text-[11px] text-white/80 transition hover:text-white sm:text-xs"
     >
-      <span className="relative flex h-1.5 w-1.5 flex-none" aria-hidden>
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-mid [animation-duration:2.5s]" />
-        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand-mid" />
-      </span>
+      {christmasTheme ? (
+        // Festive marker in place of the pulsing dot, across all slides.
+        <span className="flex-none text-sm leading-none" aria-hidden>🎄</span>
+      ) : (
+        <span className="relative flex h-1.5 w-1.5 flex-none" aria-hidden>
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-mid [animation-duration:2.5s]" />
+          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand-mid" />
+        </span>
+      )}
       <span className="truncate">
         {slide.lead}
         {slide.detail && (

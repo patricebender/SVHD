@@ -1,3 +1,15 @@
+/**
+ * Christmas theme — TEMPORARY. Set to `false` after the holidays to return the
+ * site to its normal look; everything festive keys off this one flag:
+ *   - festive logo in header, footer and JSON-LD
+ *   - `theme-christmas` class on <html> → warm red/gold accents + banner gradient
+ *   - a subtle snowfall overlay
+ *   - a 🎄 prefix on the promo banner
+ * No other edit is needed to revert. `public/logo-christmas.svg` and the
+ * `.theme-christmas` block in globals.css can be kept for next year or deleted.
+ */
+export const christmasTheme = true;
+
 export const siteConfig = {
   name: "Schäferhundeverein Heidelberg & Dossenheim e.V.",
   shortName: "SV OG Heidelberg & Dossenheim",

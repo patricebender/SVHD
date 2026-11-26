@@ -82,6 +82,30 @@ const isExternal = (href: string) => /^https?:\/\//.test(href);
 const externalProps = (href: string) =>
   isExternal(href) ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
+/**
+ * Render a news-body paragraph, turning inline `[label](href)` markers into
+ * links so a name in running text can point somewhere (e.g. a partner org).
+ * Plain markdown-link subset only; all other text passes through unchanged.
+ */
+const LINK_RE = /\[([^\]]+)\]\(([^)]+)\)/g;
+function renderParagraph(text: string) {
+  const parts: React.ReactNode[] = [];
+  let last = 0;
+  for (const m of text.matchAll(LINK_RE)) {
+    const [whole, label, href] = m;
+    const start = m.index ?? 0;
+    if (start > last) parts.push(text.slice(last, start));
+    parts.push(
+      <Link key={start} href={href} {...externalProps(href)} className="font-semibold underline underline-offset-2 hover:no-underline">
+        {label}
+      </Link>,
+    );
+    last = start + whole.length;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return parts;
+}
+
 const ArrowRight = () => (
   <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
     <path
@@ -184,7 +208,7 @@ export default function AktuellesPage() {
                   </figure>
                 )}
                 {lead.body.map((p, i) => (
-                  <p key={i}>{p}</p>
+                  <p key={i}>{renderParagraph(p)}</p>
                 ))}
               </div>
               {/* Stacked gallery only for landscape / multi-image leads. */}

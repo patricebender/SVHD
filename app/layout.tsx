@@ -4,7 +4,8 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { OrganizationJsonLd } from "@/components/json-ld";
-import { siteConfig } from "@/lib/site";
+import { Snowfall } from "@/components/snowfall";
+import { siteConfig, christmasTheme } from "@/lib/site";
 
 const leagueSpartan = League_Spartan({
   subsets: ["latin"],
@@ -33,6 +34,28 @@ export const metadata: Metadata = {
     "SV Ortsgruppe",
   ],
   alternates: { canonical: "/" },
+  // Icons are declared here (not via the app/icon.* file convention) so the
+  // favicon follows the christmasTheme flag like the logo does. When the flag is
+  // off, this serves the original blue icons that now live in public/ — reverting
+  // is just flipping the flag, no file juggling. The SVG is the festive marker
+  // (green dog + red hat) that modern browsers show in the tab.
+  icons: christmasTheme
+    ? {
+        icon: [
+          { url: "/icon-christmas.svg", type: "image/svg+xml" },
+          { url: "/icon-christmas.png", type: "image/png", sizes: "any" },
+        ],
+        shortcut: "/favicon-christmas.ico",
+        apple: "/apple-icon-christmas.png",
+      }
+    : {
+        icon: [
+          { url: "/icon.svg", type: "image/svg+xml" },
+          { url: "/icon.png", type: "image/png", sizes: "any" },
+        ],
+        shortcut: "/favicon.ico",
+        apple: "/apple-icon.png",
+      },
   openGraph: {
     type: "website",
     locale: "de_DE",
@@ -63,9 +86,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de" className={leagueSpartan.variable}>
+    <html
+      lang="de"
+      className={`${leagueSpartan.variable} ${christmasTheme ? "theme-christmas" : ""}`}
+    >
       <body>
         <OrganizationJsonLd />
+        {christmasTheme && <Snowfall />}
         <SiteHeader />
         <main>{children}</main>
         <SiteFooter />

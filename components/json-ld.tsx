@@ -1,4 +1,4 @@
-import { siteConfig, contact } from "@/lib/site";
+import { siteConfig, contact, christmasTheme } from "@/lib/site";
 import type { Discipline } from "@/lib/content";
 import { getScheduleForDiscipline } from "@/lib/content";
 
@@ -10,7 +10,7 @@ export function OrganizationJsonLd() {
     name: siteConfig.name,
     alternateName: siteConfig.shortName,
     url: `https://${siteConfig.domain}`,
-    logo: `https://${siteConfig.domain}/logo.svg`,
+    logo: `https://${siteConfig.domain}${christmasTheme ? "/logo-christmas.svg" : "/logo.svg"}`,
     foundingDate: String(siteConfig.foundingYear),
     description: siteConfig.description,
     sport: "Hundesport",

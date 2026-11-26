@@ -110,3 +110,96 @@
     display: none;                    /* WebKit/Blink */
   }
 }
+
+/* =========================================================
+   CHRISTMAS THEME — TEMPORARY. Everything here is scoped to
+   `.theme-christmas` on <html>, which is toggled by the
+   `christmasTheme` flag in lib/site.ts. Set that flag to false
+   after the holidays and this whole block goes dormant; it can
+   then be left for next year or deleted outright. Nothing below
+   touches the base look when the flag is off.
+   ========================================================= */
+.theme-christmas {
+  /* Christmas spirit = red AND green together, not red alone. We remap the
+     site's --color-brand* tokens so structural colour (headings, surfaces,
+     footer, hero) turns deep EVERGREEN — calm and festive — while the
+     interactive --color-brand stays RED, so buttons and links pop red against
+     green. Gold warms the accents. Overriding the same tokens the whole site
+     reads means no component edits, and it all reverts with the flag.
+
+     --color-brand        drives interactive bits (buttons, links): RED pop.
+     --color-brand-dark   drives headings: deep GREEN for a calm festive base.
+     --color-brand-ink    drives footer + page-hero: deep PINE, not maroon. */
+  --color-brand:        #c1121f;  /* interactive red (AA on white) */
+  --color-brand-hover:  #9a0e18;  /* deeper red for hover/active */
+  --color-brand-dark:   #0f5132;  /* evergreen for headings on light */
+  --color-brand-light:  #e8f1ec;  /* very light green tint — surfaces */
+  --color-brand-mid:    #d4a24c;  /* gold-ish mid tint — accents */
+  --color-brand-ink:    #0c2a1b;  /* deep pine (footer/hero), not red */
+
+  --color-muted:  #f3f8f4;                     /* light green-tinted surface */
+  --color-border: rgba(15, 81, 50, 0.16);      /* green-tinted hairline */
+
+  /* Accents. */
+  --color-accent: #c1121f;   /* red, for the garland line etc. */
+  --color-gold:   #b8860b;   /* warm gold */
+
+  /* Re-tint the soft shadows (base ones carry a blue cast) toward pine green. */
+  --shadow-soft: 0 10px 30px rgba(12, 42, 27, 0.14);
+  --shadow-card: 0 2px 12px rgba(12, 42, 27, 0.10);
+}
+
+/* Promo bar: the most visible surface — a cosy pine→red festive gradient that
+   ties the theme together; text stays white (set on the links). */
+.theme-christmas .promo-bar {
+  background-image: linear-gradient(90deg, #0f5132 0%, #146c43 50%, #9a0e18 100%);
+}
+
+/* Section eyebrows pick up a touch of gold to feel seasonal. */
+.theme-christmas .eyebrow {
+  color: var(--color-gold);
+}
+
+/* ---- Snowfall (see components/snowfall.tsx) ---------------------------- */
+.snow {
+  position: fixed;
+  inset: 0;
+  z-index: 40;              /* above content, below the sticky header (z-50) */
+  overflow: hidden;
+  pointer-events: none;
+}
+.snow__flake {
+  position: absolute;
+  top: -5%;
+  color: #ffffff;
+  text-shadow: 0 0 4px rgba(120, 170, 210, 0.55);
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: snow-fall var(--snow-duration, 15s) linear var(--snow-delay, 0s) infinite;
+}
+
+@keyframes snow-fall {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: var(--snow-opacity, 0.6);
+  }
+  90% {
+    opacity: var(--snow-opacity, 0.6);
+  }
+  100% {
+    transform: translate3d(14px, 105vh, 0) rotate(260deg);
+    opacity: 0;
+  }
+}
+
+/* Respect users who prefer less motion: keep a faint static dusting at the top
+   rather than animating anything. */
+@media (prefers-reduced-motion: reduce) {
+  .snow__flake {
+    animation: none;
+    opacity: calc(var(--snow-opacity, 0.6) * 0.5);
+  }
+}
