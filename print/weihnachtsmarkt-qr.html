@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Weihnachtsmarkt-Aushang · SV Heidelberg &amp; Dossenheim</title>
+<!--
+  DIN A4 print flyer for the Dossenheimer Weihnachtstrubel stand. A large,
+  festive QR code (green modules, error-correction level H) pointing to the
+  homepage https://schaeferhundeverein-heidelberg.de/ — with the Santa-hat
+  logo centred inside it. Level H tolerates ~30% occlusion, so the centre
+  badge never breaks the scan; verified with zbarimg.
+
+  Self-contained — logo lives next to this file in print/logo-christmas.svg,
+  the QR is inlined below so the logo can sit on top of it.
+
+  To make a PDF: open in a browser → Print (Cmd/Ctrl+P) → "Save as PDF",
+  paper A4, margins "None", enable "Background graphics".
+-->
+<style>
+  @page { size: A4; margin: 0; }
+
+  :root {
+    --green: #0f5132;
+    --green-deep: #0c2a1b;
+    --red: #c1121f;
+    --red-deep: #9a0e18;
+    --gold: #b8860b;
+    --ink: #10232e;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: "League Spartan", "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+    color: var(--ink);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .sheet {
+    position: relative;
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto;
+    padding: 18mm 18mm 14mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  /* Festive top & bottom bands. */
+  .sheet::before,
+  .sheet::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 9mm;
+    background: linear-gradient(90deg, var(--green) 0%, #146c43 50%, var(--red) 100%);
+  }
+  .sheet::before { top: 0; }
+  .sheet::after { bottom: 0; }
+
+  /* Decorative snowflakes scattered in the margins (print-safe, static). */
+  .flake {
+    position: absolute;
+    color: var(--green);
+    opacity: 0.16;
+    user-select: none;
+  }
+
+  .eyebrow {
+    margin: 4mm 0 0;
+    font-size: 11pt;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  h1 {
+    margin: 2.5mm 0 0;
+    font-size: 29pt;
+    line-height: 1.1;
+    font-weight: 800;
+    color: var(--green);
+  }
+  h1 .amp { color: var(--red); }
+
+  .subtitle {
+    margin: 4mm auto 0;
+    max-width: 150mm;
+    font-size: 14.5pt;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+
+  /* ---- Festive QR centrepiece -------------------------------------- */
+  .qr-wrap {
+    position: relative;
+    margin: auto;               /* vertically centre in the remaining space */
+    /* As wide as the text column (sheet width minus the 18mm side padding). */
+    width: 160mm;
+    height: 160mm;
+    /* The QR SVG carries its own 2-module quiet zone, so only a thin padding is
+       needed; the code then fills the whole card edge-to-edge. */
+    padding: 3mm;
+    border-radius: 7mm;
+    background: #ffffff;
+    border: 2.5mm solid var(--green);
+    box-shadow: 0 2mm 10mm rgba(12, 42, 27, 0.16);
+  }
+  /* little red "ornament" corners */
+  .qr-wrap .corner {
+    position: absolute;
+    width: 6mm; height: 6mm;
+    border-radius: 50%;
+    background: var(--red);
+  }
+  .qr-wrap .corner.tl { top: -3mm; left: -3mm; }
+  .qr-wrap .corner.tr { top: -3mm; right: -3mm; }
+  .qr-wrap .corner.bl { bottom: -3mm; left: -3mm; }
+  .qr-wrap .corner.br { bottom: -3mm; right: -3mm; }
+
+  .qr-wrap img.qr { display: block; width: 100%; height: 100%; image-rendering: pixelated; }
+
+  /* Centre badge holding the logo, punched out of the QR. */
+  .qr-badge {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40mm; height: 40mm;
+    background: #ffffff;
+    border-radius: 5mm;
+    box-shadow: 0 0 0 1.5mm #ffffff;  /* white gap so modules don't touch the logo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .qr-badge img { width: 30mm; height: auto; }
+
+  .scan-hint {
+    margin: 5mm 0 0;
+    font-size: 16pt;
+    font-weight: 800;
+    color: var(--red);
+  }
+  .scan-hint .g { color: var(--green); }
+
+  .url {
+    margin: 2mm 0 0;
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--green-deep);
+  }
+
+  .footer {
+    margin-top: 6mm;
+    font-size: 10.5pt;
+    color: var(--ink);
+    opacity: 0.8;
+  }
+  .footer strong { color: var(--green); }
+</style>
+</head>
+<body>
+  <section class="sheet">
+    <!-- Scattered festive snowflakes. Kept in the margins (clear of the QR) so
+         they never interfere with scanning; varied size/opacity for a natural
+         flurry. -->
+    <span class="flake" style="top:16mm;  left:14mm;  font-size:32pt;">❄</span>
+    <span class="flake" style="top:14mm;  left:30mm;  font-size:16pt; opacity:0.12;">❅</span>
+    <span class="flake" style="top:28mm;  right:16mm; font-size:22pt;">❆</span>
+    <span class="flake" style="top:44mm;  left:18mm;  font-size:18pt; opacity:0.12;">❄</span>
+    <span class="flake" style="top:50mm;  right:24mm; font-size:14pt; opacity:0.10;">❅</span>
+    <span class="flake" style="top:70mm;  left:12mm;  font-size:26pt;">❆</span>
+    <span class="flake" style="top:78mm;  right:14mm; font-size:20pt;">❄</span>
+    <span class="flake" style="top:96mm;  right:22mm; font-size:14pt; opacity:0.12;">❅</span>
+    <span class="flake" style="bottom:58mm; left:16mm;  font-size:22pt;">❄</span>
+    <span class="flake" style="bottom:46mm; right:16mm; font-size:28pt;">❆</span>
+    <span class="flake" style="bottom:40mm; left:26mm;  font-size:15pt; opacity:0.12;">❅</span>
+    <span class="flake" style="bottom:30mm; right:26mm; font-size:18pt;">❄</span>
+    <span class="flake" style="bottom:22mm; left:18mm;  font-size:26pt;">❆</span>
+    <span class="flake" style="bottom:18mm; right:18mm; font-size:30pt;">❄</span>
+    <span class="flake" style="bottom:14mm; left:40mm;  font-size:14pt; opacity:0.10;">❅</span>
+
+    <p class="eyebrow">Frohe Weihnachten &amp; willkommen</p>
+    <h1>SV Heidelberg <span class="amp">&amp;</span> Dossenheim</h1>
+    <p class="subtitle">
+      Besucht uns online: Trainingsangebote, Termine und alles rund um unseren
+      Hundesportverein &ndash; einfach den Code scannen.
+    </p>
+
+    <div class="qr-wrap">
+      <span class="corner tl"></span><span class="corner tr"></span>
+      <span class="corner bl"></span><span class="corner br"></span>
+
+      <!-- Festive green QR (error-correction H). viewBox cropped to the code so
+           it fills the card edge-to-edge; the card padding is the quiet zone. -->
+      <img class="qr" src="qr-xmas.svg" alt="QR-Code zur Website schaeferhundeverein-heidelberg.de" />
+
+      <!-- Centre logo badge -->
+      <div class="qr-badge">
+        <img src="logo-christmas.svg" alt="Vereinslogo mit Nikolausmütze" />
+      </div>
+    </div>
+
+    <p class="scan-hint">🎄 Scannen &amp; <span class="g">entdecken</span> 🐾</p>
+    <p class="url">schaeferhundeverein-heidelberg.de</p>
+
+    <p class="footer">
+      <strong>Verein für Deutsche Schäferhunde</strong> &middot; OG Heidelberg &amp; Dossenheim e.V. &middot; gegr. 1922
+    </p>
+  </section>
+</body>
+</html>
