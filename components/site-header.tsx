@@ -35,7 +35,7 @@ export function SiteHeader() {
           />
           <span className="flex flex-col leading-tight">
             <span className="text-sm font-bold text-brand-dark lg:text-base">
-              SV Heidelberg &amp; Dossenheim
+              SV Heidelberg und Dossenheim
             </span>
             <span className="text-[11px] font-medium text-foreground/70 lg:text-xs">
               Verein für Deutsche Schäferhunde e.V.

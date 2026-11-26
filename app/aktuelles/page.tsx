@@ -65,7 +65,7 @@ function NewsGallery({ images, framed }: { images: NewsImages; framed?: boolean 
 export const metadata: Metadata = {
   title: "Aktuelles",
   description:
-    "Neuigkeiten aus dem Schäferhundeverein Heidelberg & Dossenheim e.V.: freie Trainingsplätze, Terminkalender, Social Walks und mehr.",
+    "Neuigkeiten aus dem Schäferhundeverein Heidelberg und Dossenheim e.V.: freie Trainingsplätze, Terminkalender, Social Walks und mehr.",
   alternates: { canonical: "/aktuelles/" },
 };
 

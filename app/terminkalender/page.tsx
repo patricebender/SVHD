@@ -7,7 +7,7 @@ import { events } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Terminkalender",
   description:
-    "Alle Termine 2026 der OG Heidelberg & Dossenheim: Jahreshauptversammlung, Arbeitseinsätze, BH-Prüfung, Agility-Turnier Baden-Cup, Vereinsfeste und Social Walks.",
+    "Alle Termine 2026 der OG Heidelberg und Dossenheim: Jahreshauptversammlung, Arbeitseinsätze, BH-Prüfung, Agility-Turnier Baden-Cup, Vereinsfeste und Social Walks.",
   alternates: { canonical: "/terminkalender/" },
 };
 

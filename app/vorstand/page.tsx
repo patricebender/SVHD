@@ -5,7 +5,7 @@ import { getPerson, type PersonId } from "@/lib/people";
 export const metadata: Metadata = {
   title: "Der Vorstand",
   description:
-    "Der Vorstand des Schäferhundevereins Heidelberg & Dossenheim e.V. – die Ansprechpartner rund um Verein, Training und Sport.",
+    "Der Vorstand des Schäferhundevereins Heidelberg und Dossenheim e.V. – die Ansprechpartner rund um Verein, Training und Sport.",
   alternates: { canonical: "/vorstand/" },
 };
 

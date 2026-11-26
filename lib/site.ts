@@ -11,12 +11,12 @@
 export const christmasTheme = true;
 
 export const siteConfig = {
-  name: "Schäferhundeverein Heidelberg & Dossenheim e.V.",
-  shortName: "SV OG Heidelberg & Dossenheim",
+  name: "Schäferhundeverein Heidelberg und Dossenheim e.V.",
+  shortName: "SV OG Heidelberg und Dossenheim",
   slogan: "Verein für Deutsche Schäferhunde",
   domain: "schaeferhundeverein-heidelberg.de",
   description:
-    "Verein für Deutsche Schäferhunde, Ortsgruppe Heidelberg & Dossenheim e.V. (gegr. 1922). Hundesport, Agility, IGP, Begleithundeprüfung, Welpentraining und mehr. Hunde aller Rassen willkommen, auch Nichtmitglieder.",
+    "Verein für Deutsche Schäferhunde, Ortsgruppe Heidelberg und Dossenheim e.V. (gegr. 1922). Hundesport, Agility, IGP, Begleithundeprüfung, Welpentraining und mehr. Hunde aller Rassen willkommen, auch Nichtmitglieder.",
   color: "#0080c9",
   instagram: "https://www.instagram.com/schaeferhundeverein_heidelberg",
   foundingYear: 1922,
@@ -24,7 +24,7 @@ export const siteConfig = {
 
 export const contact = {
   address: {
-    name: "Schäferhundeverein Heidelberg & Dossenheim e.V.",
+    name: "Schäferhundeverein Heidelberg und Dossenheim e.V.",
     street: "Im Fennenberger 2",
     city: "69121 Heidelberg",
   },

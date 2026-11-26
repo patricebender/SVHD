@@ -6,7 +6,7 @@ import { contact, siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Kontakt",
   description:
-    "Kontakt zum Schäferhundeverein Heidelberg & Dossenheim e.V.: Anschrift Im Fennenberger 2, 69121 Heidelberg, Vereinsheim-Telefon und Anmeldung zum Schnuppertraining.",
+    "Kontakt zum Schäferhundeverein Heidelberg und Dossenheim e.V.: Anschrift Im Fennenberger 2, 69121 Heidelberg, Vereinsheim-Telefon und Anmeldung zum Schnuppertraining.",
   alternates: { canonical: "/kontakt/" },
 };
 

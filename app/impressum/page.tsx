@@ -5,7 +5,7 @@ import { contact, siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Impressum",
   description:
-    "Impressum des Vereins für Deutsche Schäferhunde, OG Heidelberg & Dossenheim e.V.: Anschrift, Vertretungsberechtigte und Vereinsregister.",
+    "Impressum des Vereins für Deutsche Schäferhunde, OG Heidelberg und Dossenheim e.V.: Anschrift, Vertretungsberechtigte und Vereinsregister.",
   alternates: { canonical: "/impressum/" },
 };
 

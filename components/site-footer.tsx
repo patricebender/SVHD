@@ -19,7 +19,7 @@ export function SiteFooter() {
               className="h-11 w-auto"
             />
             <span className="font-bold leading-tight text-white">
-              SV Heidelberg &amp;<br />Dossenheim e.V.
+              SV Heidelberg und<br />Dossenheim e.V.
             </span>
           </div>
           <p className="mt-4 text-sm leading-relaxed text-white/60">

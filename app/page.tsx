@@ -17,7 +17,7 @@ export default function HomePage() {
         <div className="container-page relative py-24 lg:py-32 lg:min-h-[32rem]">
           <div className="eyebrow text-brand-mid">Gegründet {siteConfig.foundingYear}</div>
           <h1 className="max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
-            Hundesport in Heidelberg &amp; Dossenheim
+            Hundesport in Heidelberg und Dossenheim
           </h1>
           <p className="mt-5 max-w-2xl text-lg text-white/80">
             Wir bilden Deinen Hund zu sicheren Begleit- und Sporthunden aus, für

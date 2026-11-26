@@ -5,7 +5,7 @@ import { contact, siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Datenschutzerklärung",
   description:
-    "Datenschutzerklärung des Schäferhundevereins Heidelberg & Dossenheim e.V.: Welche Daten beim Besuch unserer Webseite verarbeitet werden – ohne Cookies und ohne Tracking.",
+    "Datenschutzerklärung des Schäferhundevereins Heidelberg und Dossenheim e.V.: Welche Daten beim Besuch unserer Webseite verarbeitet werden – ohne Cookies und ohne Tracking.",
   alternates: { canonical: "/datenschutz/" },
 };
 

@@ -6,7 +6,7 @@ import { contact } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Mitgliedschaft & Schnuppertraining",
   description:
-    "Mitglied werden im Schäferhundeverein Heidelberg & Dossenheim e.V.: Schnuppertraining, Beiträge (15 € Aufnahme, 30 € jährlich) und Formulare. Für alle Rassen, auch Nichtmitglieder.",
+    "Mitglied werden im Schäferhundeverein Heidelberg und Dossenheim e.V.: Schnuppertraining, Beiträge (15 € Aufnahme, 30 € jährlich) und Formulare. Für alle Rassen, auch Nichtmitglieder.",
   alternates: { canonical: "/mitgliedschaft/" },
 };
 

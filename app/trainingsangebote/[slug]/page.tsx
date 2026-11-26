@@ -30,7 +30,7 @@ export async function generateMetadata({
       url: d.image,
       width: d.imageWidth,
       height: d.imageHeight,
-      alt: `${d.title} beim Schäferhundeverein Heidelberg & Dossenheim`,
+      alt: `${d.title} beim Schäferhundeverein Heidelberg und Dossenheim`,
     },
   ];
   return {

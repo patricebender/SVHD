@@ -4,7 +4,7 @@ import { PageHero } from "@/components/page-hero";
 export const metadata: Metadata = {
   title: "Platzordnung",
   description:
-    "Die Platzordnung des Schäferhundevereins Heidelberg & Dossenheim e.V. für ein harmonisches und sicheres Miteinander auf dem Vereinsgelände.",
+    "Die Platzordnung des Schäferhundevereins Heidelberg und Dossenheim e.V. für ein harmonisches und sicheres Miteinander auf dem Vereinsgelände.",
   alternates: { canonical: "/platzordnung/" },
 };
 
