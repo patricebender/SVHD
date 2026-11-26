@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   // favicon follows the christmasTheme flag like the logo does. When the flag is
   // off, this serves the original blue icons that now live in public/ — reverting
   // is just flipping the flag, no file juggling. The SVG is the festive marker
-  // (green dog + red hat) that modern browsers show in the tab.
+  // (the logo in Christmas green) that modern browsers show in the tab.
   icons: christmasTheme
     ? {
         icon: [
